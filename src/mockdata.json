@@ -1,0 +1,360 @@
+{
+    "domestic": [
+        {
+            "region": "Luzon",
+            "location": {
+                "NCR": [
+                    "Manila"
+                ],
+                "Bicol": [
+                    "Legazpi",
+                    "Naga",
+                    "Masbate",
+                    "Virac"
+                ],
+                "Central Luzon": [
+                    "San Jose",
+                    "Angeles City",
+                    "Subic Bay"
+                ],
+                "Cagayan Valley": [
+                    "Tuguegarao",
+                    "Basco"
+                ],
+                "MIMAROPA": [
+                    "Coron Town",
+                    "Cuyo",
+                    "Marinduque",
+                    "Romblon",
+                    "Puerto Princesa"
+                ],
+                "Ilocos Region": [
+                    "Laoag"
+                ]
+            }
+        },
+        {
+            "region": "Visayas",
+            "location": {
+                "Western Visayas": [
+                    "Bacolod",
+                    "Roxas City",
+                    "Caticlan",
+                    "Antique",
+                    "Kalibo",
+                    "Iloilo"
+                ],
+                "Central Visayas": [
+                    "Dumaguete",
+                    "Tagbilaran",
+                    "Cebu"
+                ], 
+                "Eastern Visayas": [
+                    "Tacloban City",
+                    "Calbayog",
+                    "Catarman",
+                    "Ormoc"
+                ]                
+            }
+        },
+        {
+            "region": "Mindanao",
+            "location": {
+                "Caraga": [
+                    "Butuan",
+                    "Surigao",
+                    "Tandag"
+                ],
+                "Northern Mindanao": [
+                    "Cagayan De Oro",
+                    "Mambajao"
+                ],
+                "SOCCSKSARGEN": [
+                    "Cotobato",
+                    "General Santos"
+                ],
+                "Zamboanga Peninsula": [
+                    "Dipolog",
+                    "Pagadian",
+                    "Zamboanga"
+                ],
+                "BARMM": [
+                    "Jolo",
+                    "Sanga-Sanga"
+                ],
+                "Davao Region": [
+                    "Davao City"
+                ]
+            }
+        }
+    ],
+    "international": [
+        {
+            "region": "America",
+            "location": {
+                "Canada": [
+                    "Toronto",
+                    "Vancouver",
+                    "Dorval",
+                    "Calgary",
+                    "Edmonton"
+                ],
+                "Mexico": [
+                    "Mexico City",
+                    "Cancún",
+                    "Guadalajara",
+                    "Monterrey",
+                    "Tijuana",
+                    "Mérida"
+                ],
+                "USA": [
+                    "Atlanta",
+                    "Los Angeles",
+                    "Chicago",
+                    "Dallas",
+                    "Denver",
+                    "New York",
+                    "San Fransisco",
+                    "Seattle",
+                    "Las Vegas",
+                    "Orlando"
+
+                ],
+                "Argentina": [
+                    "Buenos Aires",
+                    "Córdoba",
+                    "Mendoza",
+                    "Bariloche",
+                    "Puerto Iguazu",
+                    "Salta",
+                    "Ushuaia",
+                    "El Calafate",
+                    "Trelew"
+                ],
+                "Brazil": [
+                    "Sao Paulo",
+                    "Rio De Janeiro",
+                    "Brasília",
+                    "Porto Alegre",
+                    "Curitiba",
+                    "Salvador",
+                    "Belo Horizonte",
+                    "Recife"
+                ],
+                "Colombia": [
+                    "Bogota",
+                    "Medellín",
+                    "Cartagena",
+                    "Cali",
+                    "Barranquilla",
+                    "San Andrés",
+                    "Santa Marta"
+
+                ]
+            }
+        },
+        {
+            "region": "Europe",
+            "location": {
+                "Germany": [
+                    "Frankfurt am Main",
+                    "Berlin",
+                    "Munich",
+                    "Dusseldorf",
+                    "Hamburg",
+                    "Stuttgart",
+                    "Cologne",
+                    "Hannover"
+                ],
+                "United Kingdom": [
+                    "London",
+                    "Manchester",
+                    "Edinburgh",
+                    "Birmingham",
+                    "Bristol",
+                    "Glasgow",
+                    "Belfast",
+                    "Newcastle",
+                    "Liverpool",
+                    "Aberdeen"
+                ],
+                "France": [
+                    "Paris",
+                    "Lille",
+                    "Strasbourg",
+                    "Lyon",
+                    "Nice",
+                    "Ajaccio",
+                    "Bastia",
+                    "Figari",
+                    "Toulon",
+                    "Marseille"
+                ],
+                "Italy": [
+                    "Rome",
+                    "Milan",
+                    "Orio al Serio",
+                    "Venice",
+                    "Sicily",
+                    "Bologna",
+                    "Naples",
+                    "Tuscany",
+                    "Cinisi",
+                    "Bari"
+                ],
+                "Spain": [
+                    "Madrid",
+                    "Barcelona",
+                    "Majorca",
+                    "Malaga",
+                    "Alicante",
+                    "Las Palmas",
+                    "Tenerife",
+                    "Ibiza",
+                    "Seville"
+                ],
+                "Ukraine": [
+                    "Kyiv",
+                    "Lviv Oblast",
+                    "Odessa",
+                    "Kharkiv Oblast"
+                ],
+                "Poland": [
+                    "Warsaw",
+                    "Balice",
+                    "Gdansk",
+                    "Katowice",
+                    "Wroclaw",
+                    "Poznan",
+                    "Goleniów"
+                ],
+                "Romania": [
+                    "Bucharest",
+                    "Cluj-Napoca",
+                    "Timisoara",
+                    "Iasi",
+                    "Sibiu"
+                ],
+                "Belgium": [
+                    "Brussels",
+                    "Charleroi",
+                    "Ostend",
+                    "Antwerpen",
+                    "Liege"
+                ],
+                "Netherlands": [
+                    "Amsterdam",
+                    "Eindhoven",
+                    "Rotterdam",
+                    "Maastricht",
+                    "Groningen"
+                ]
+            }
+        },
+        {
+            "region": "Asia",
+            "location": {
+                "China": [
+                    "Beijing Capital",
+                    "Beijing Daxing",
+                    "Shanghai",
+                    "Guangzhou",
+                    "Chengdu",
+                    "Kunming"
+                ],
+                "Hong Kong": [
+                    "Chek Lap Kok"
+                ],
+                "India": [
+                    "New Delhi",
+                    "Mumbai",
+                    "Chennai",
+                    "Kochi",
+                    "Bangalore",
+                    "Hyderabad",
+                    "Goa"
+                ],
+                "Japan": [
+                    "Tokyo",
+                    "Chiba",
+                    "South Osaka",
+                    "SouthWest Osaka",
+                    "Aichi"
+
+                ]
+            }
+        },
+        {
+            "region": "SouthEast Asia",
+            "location": {
+                "Cambodia": [
+                    "Phnom Penh",
+                    "Krong Siem Reap",
+                    "Preah Sihanouk"
+                ],
+                "Indonesia": [
+                    "Tanggerang",
+                    "Surabaya",
+                    "Banyuwangi",
+                    "Denpasar",
+                    "Sepinggan",
+                    "Medan"
+                ],
+                "Laos": [
+                    "Vientiane",
+                    "Luang Phabang"
+                ],
+                "Malaysia": [
+                    "Sepang",
+                    "Pulau Langkawi",
+                    "Kuching",
+                    "Penang",
+                    "Kota Kinabalu",
+                    "Johor Bahru"
+                ],
+                "Myanmar": [
+                    "Yangon",
+                    "Tada-U",
+                    "နေပြည်တော်"
+                ],
+                "Singapore": [
+                    "Changi",
+                    "Seletar"
+                ],
+                "Thailand": [
+                    "Bangkok",
+                    "Samutprakarn",
+                    "Chiang Mai",
+                    "Chiang Rai",
+                    "Phuket",
+                    "Hat Yai"
+                ],
+                "Vietnam": [
+                    "Hanoi",
+                    "Ho Chi Minh City",
+                    "Da Nang"
+                ]
+            }
+        },
+        {
+            "region": "Oceania",
+            "location": {
+                "New Zealand": [
+                    "Auckland",
+                    "Wellington",
+                    "Christchurch",
+                    "Dunedin",
+                    "Queenstown"
+                ],
+                "Australia": [
+                    "Sydney",
+                    "Melbourne",
+                    "Adelaide",
+                    "Brisbane",
+                    "Perth"
+                ]
+            }
+        }
+    ]
+
+}

@@ -1,0 +1,70 @@
+import React, {useReducer, useRef} from 'react'
+import { faCompass, faBars, faXmark } from "@fortawesome/free-solid-svg-icons"
+
+const NavigationLogic = () => {
+
+    const defaultState = {
+    dropdown: "hidden",
+    mobileMenu: "hidden",
+    buttonIcon: faBars,
+    navPosition: "relative",
+    webLinkDesign: false
+    }
+
+    const reducer = (state, action) => {
+    const {type, payload} = action 
+    switch(type) {
+        case "CLICK":
+            return {...state, dropdown: payload.dropdown, buttonIcon: payload.buttonIcon}
+        case "RESIZE":
+            return {...state, dropdown: payload.dropdown, mobileMenu: payload.mobileMenu, navPosition: payload.navPosition, webLinkDesign: payload.webLinkDesign}
+        default: return
+        }
+    }
+
+    const [state, dispatch] = useReducer(reducer, defaultState);
+
+    const openMenu = () => {
+        dispatch({ 
+            type: "CLICK",
+            payload: {
+                dropdown: state.dropdown === "hidden" ? "block" : "hidden",
+                buttonIcon: state.dropdown === "hidden" ? faXmark : faBars
+            }
+        })
+    };
+
+    const showMenu = () => {
+        dispatch({ 
+            type: "RESIZE",
+            payload: {
+                dropdown: window.innerWidth < 1023 ? "hidden" : "block",
+                mobileMenu: window.innerWidth < 1023 ? "block" : "hidden", 
+                navPosition: window.innerWidth < 1023 ? "absolute" : "relative",
+                webLinkDesign: window.innerWidth < 1023 ? false : true
+            }
+        })
+    };
+    const ref = useRef(null)
+    
+    const scrollUp = () => {
+    ref.current?.scrollIntoView({behavior: 'smooth'});
+    };
+
+    window.addEventListener('resize', showMenu);
+
+    const value = {
+        dropdown: state.dropdown,
+        mobileMenu: state.mobileMenu,
+        buttonIcon: state.buttonIcon,
+        navPosition: state.navPosition,
+        webLinkDesign: state.webLinkDesign,
+        openMenu,
+        showMenu,
+        ref,
+        scrollUp
+    }
+    return value
+}
+
+export default NavigationLogic
