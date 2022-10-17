@@ -12,7 +12,7 @@ const AppProvider = ({children}) => {
         id: "",
         open: false
     })
-    console.log(user)
+   
     const [destinationUI, setDestinationUI] = useState({
         id: "",
         open: false,
@@ -21,7 +21,6 @@ const AppProvider = ({children}) => {
     const userSignIn = (userInfo, token) => {
       setUser(userInfo)
       localStorage.setItem("authenticated", token);
-      console.log(token)
     }
 
     const userSignOut = () => {
@@ -60,6 +59,12 @@ const AppProvider = ({children}) => {
             open: !bookingUI.open
         })
     }
+
+    useEffect (()=>{
+      if (!user) {
+        localStorage.clear()
+      }
+    }, [user])
 
     const value = {
       isLoading,

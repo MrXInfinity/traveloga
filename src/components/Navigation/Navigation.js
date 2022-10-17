@@ -4,6 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCompass } from "@fortawesome/free-solid-svg-icons"
 import NavigationLogic from './NavigationLogic'
 import Footer from '../Footer/Footer'
+import BookingUI from '../BookingUI/BookingUI'
+import EachDestinationUI from '../EachDestinationUI'
+import LoadingComponent from '../LoadingComponent'
+import { SuccessfulComponent, FailedComponent } from '../ResultComponent'
 import { useGlobalContext } from '../../context'
 
 const Nav = () => {
@@ -45,9 +49,15 @@ const Nav = () => {
         
         
       </div>
-
+    
+    <BookingUI />
+    <EachDestinationUI />
+    <LoadingComponent />
+    <SuccessfulComponent />
+    <FailedComponent />
     <Outlet />
     <Footer />
+    
     </div>
   )
 }

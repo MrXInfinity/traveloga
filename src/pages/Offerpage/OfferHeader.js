@@ -1,6 +1,6 @@
 import React from 'react'
 
-const OfferHeader = () => {
+const OfferHeader = () => { 
   
   return (
       <header className="w-full h-fit flex justify-center items-center pt-48 md:pt-44 lg:pt-40 pb-16 md:pb-12 lg:pb-12">

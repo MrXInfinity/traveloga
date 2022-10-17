@@ -10,7 +10,7 @@ import { faCompass, faAt, faEye } from "@fortawesome/free-solid-svg-icons"
 const Login = () => {
   const [typeIsPassword, setTypeisPassword] = useState(true)
   const {register, handleSubmit, setError, clearErrors, formState: {errors}} = useForm()
-  const {user, userSignIn, userSignOut, setIsLoading} = useGlobalContext()
+  const {user, userSignIn, setIsLoading} = useGlobalContext()
   const authenticationToken = localStorage.getItem("authenticated")
   const navigate = useNavigate()
 

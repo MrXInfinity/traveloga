@@ -2,13 +2,12 @@ import axios from 'axios'
 import React, {useEffect, useState} from 'react'
 import { useGlobalContext } from '../../context'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUserPen } from "@fortawesome/free-solid-svg-icons"
+import { faUserPen, faPowerOff } from "@fortawesome/free-solid-svg-icons"
 
 const AccountUIComponent = () => {
   const [localUser, setLocalUser] = useState({})
   const {setIsLoading, user} = useGlobalContext()
   const controller = new AbortController()
-  console.log(localUser)
 
     useEffect(() => {
       const userFetch = async () => {
@@ -34,6 +33,10 @@ const AccountUIComponent = () => {
       <h1 className='text-white break-all col-span-2'>{localUser.email}</h1>
       <button className='bg-amber-200 h-full m-2'>
         <FontAwesomeIcon className="text-2xl" icon={faUserPen} />
+        <p>EDIT</p>
+      </button>
+      <button>
+        <FontAwesomeIcon className="text-2xl" icon={faPowerOff} />
       </button>
     </div>
   )
