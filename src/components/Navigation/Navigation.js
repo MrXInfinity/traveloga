@@ -21,7 +21,7 @@ const Nav = () => {
 
   return (
     <div className='flex flex-col' ref={ref}>
-      <div className="flex w-full bg-black/40 px-6 pb-8 pt-10 lg:px-12 lg:py-8 xl:py-8 xl:px-20 justify-between fixed top-0 z-50">
+      <div className="flex w-full bg-black/40 px-6 pb-8 pt-10 lg:px-12 lg:py-8 xl:py-8 xl:px-20 justify-between fixed top-0 z-10">
         <div className="flex items-center">
           <FontAwesomeIcon className='text-white text-5xl md:text-6xl lg:text-5xl mr-2' icon={faCompass} />
           <div className=" flex-col w-40 md:w-fit">

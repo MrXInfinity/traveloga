@@ -76,8 +76,6 @@ const DestinationContent = () => {
                 )}
             </div>
         </div>
-        <EachDestinationUI />
-        <BookingUI />
     </>
     )
 }
