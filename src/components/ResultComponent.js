@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons"
 import { useGlobalContext } from '../context'
 
-const transitionComponent = ({children, isOpen, setIsOpen}) => {
+const TransitionComponent = ({children, isOpen, setIsOpen}) => {
     return (
         <Transition show={isOpen} as={Fragment}>
         <Dialog onClose={() => setIsOpen(false)}>
@@ -19,18 +19,22 @@ const transitionComponent = ({children, isOpen, setIsOpen}) => {
                 leaveTo="opacity-0">
                     <div className="flex justify-center items-center bg-black/40 inset-0 fixed top-0 z-50" />
             </Transition.Child>
-            <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className="flex py-6 px-8 bg-white w-fit items-center transition-all ease-out inset-0 duration-300">
-                    {children}
-                </Dialog.Panel>
-            </Transition.Child>
+            <div className="fixed inset-0">
+                <div className="flex min-h-full items-center justify-center p-4 text-center">
+                    <Transition.Child
+                        as={Fragment}
+                        enter="ease-out duration-300"
+                        enterFrom="opacity-0 scale-95"
+                        enterTo="opacity-100 scale-100"
+                        leave="ease-in duration-200"
+                        leaveFrom="opacity-100 scale-100"
+                        leaveTo="opacity-0 scale-95">
+                        <Dialog.Panel className="flex py-6 px-8 bg-white w-fit items-center transition-all ease-out inset-0 duration-300">
+                            {children}
+                        </Dialog.Panel>
+                    </Transition.Child>
+                </div>
+            </div>
         </Dialog>
     </Transition>
     )
@@ -58,12 +62,12 @@ const SuccessfulComponent = ({message}) => {
     }, [message])
 
     return (
-        <transitionComponent isOpen={isSuccessful} setIsOpen={setIsSuccessful}>
+        <TransitionComponent isOpen={isSuccessful} setIsOpen={setIsSuccessful}>
             <>
                 <FontAwesomeIcon className="mr-4 text-3xl" icon={faCircleCheck} />
                 <h1 className="text-xl">{localMessage} Successful</h1>
             </>
-        </transitionComponent>
+        </TransitionComponent>
     )
 }
 
@@ -103,13 +107,35 @@ const SignInRequiredComponent = () => {
     }
 
     return (
-    <div className={`flex justify-center items-center bg-black/40 w-screen h-screen fixed top-0 z-50 ${isSignInRequired ? `block` : 'hidden'}`}>
-        <div className="grid grid-cols-2 grid-flow-row py-6 px-8 bg-white w-fit items-center gap-4">
-            <h1 className="text-xl col-span-2">An Account is required for you to book flights.</h1>
-            <button className='text-center bg-[#2B8E9B]/80 hover:bg-[#2B8E9B] p-4 text-white transition-all duration-150 ease-in-out' onClick={()=>buttonClick()}>Keep Scrolling</button>
-            <Link className='text-center p-4 bg-amber-200 hover:bg-amber-300 hover:text-white transition-all duration-150 ease-in-out' to="/login" onClick={()=>buttonClick()}>LOG IN</Link>
-        </div>
-    </div>)
+    <Transition show={isSignInRequired} as={Fragment}>
+        <Dialog onClose={() => setIsSignInRequired(false)}>
+            <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0">
+                    <div className=" bg-black/40 inset-0 fixed top-0 z-50" />
+            </Transition.Child>
+            <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95">
+                <Dialog.Panel className="flex py-6 px-8 bg-white w-fit items-center transition-all ease-out inset-0 duration-300">
+                    <h1 className="text-xl col-span-2">An Account is required for you to book flights.</h1>
+                    <button className='text-center bg-[#2B8E9B]/80 hover:bg-[#2B8E9B] p-4 text-white transition-all duration-150 ease-in-out' onClick={()=>buttonClick()}>Keep Scrolling</button>
+                    <Link className='text-center p-4 bg-amber-200 hover:bg-amber-300 hover:text-white transition-all duration-150 ease-in-out' to="/login" onClick={()=>buttonClick()}>LOG IN</Link>
+                </Dialog.Panel>
+            </Transition.Child>
+        </Dialog>
+    </Transition> 
+    )
 }
 
 export {SuccessfulComponent, FailedComponent, SignInRequiredComponent}
