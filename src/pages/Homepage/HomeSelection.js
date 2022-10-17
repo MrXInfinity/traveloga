@@ -1,8 +1,6 @@
 import axios from "axios"
 import React, {useState, useEffect} from 'react'
 import Selection from "./EachHomeSelection"
-import EachDestinationUI from "../../components/EachDestinationUI"
-import BookingUI from "../../components/BookingUI/BookingUI"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons"
 
@@ -54,8 +52,6 @@ const HomeSelection = ({showCase}) => {
             </div>
             <Selection {...{info, leftPosition}} />
         </div>
-        <EachDestinationUI />
-        <BookingUI />
     </>
     )
 }
