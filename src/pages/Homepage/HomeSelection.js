@@ -37,11 +37,11 @@ const HomeSelection = ({showCase}) => {
     
     return (
     <>
-        <div className="md:py-36 md:pl-32 pl-6 py-16 flex flex-col w-full">
+        <div className="md:py-36 md:pl-32 pl-12 py-16 flex flex-col w-full">
             <div className="flex justify-between md:pr-32">
                 <div className="flex flex-col">
                     <h1 className="md:text-xl mb-1 md:mb-2 text-black/90">Where to Go:</h1>
-                    <h1 className="font-['Rubik'] text-2xl md:text-3xl md:mb-4 mb-1">{`${showCase.toUpperCase()} DESTINATIONS`}</h1>
+                    <h1 className="font-['Rubik'] text-xl md:text-3xl md:mb-4 mb-1">{`${showCase.toUpperCase()} DESTINATIONS`}</h1>
                 </div>
                 <div className=" hidden lg:flex lg:text-5xl">
                     {[[faArrowLeft, -1], [faArrowRight, 1]].map(([icon, number], index)=>(

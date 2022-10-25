@@ -37,7 +37,7 @@ const Nav = () => {
               {[
                 ["/", "Home"], ["/offers", "Offers"], ["/destinations", "Destinations"], ["/about-us", "About Us"]
               ].map(([link, title], index) => (
-                <NavLink to={link} key={index} className="lg:text-white py-4 lg:py-0 hover:border-b-4 border-transparent lg:border-amber-200 text-center transition-all ease-in-out" style={({ isActive }) => {return {color: isActive ? '#fde68a':'', borderBottom: isActive && webLinkDesign ? `4px solid #fde68a`: ``}}} onClick={()=>scrollUp()}>{title}</NavLink>
+                <NavLink to={link} key={index} className="w-full lg:w-fit lg:text-white py-4 lg:py-0 hover:border-b-4 border-transparent lg:border-amber-200 text-center transition-all ease-in-out" style={({ isActive }) => {return {color: isActive ? '#fde68a':'', borderBottom: isActive && webLinkDesign ? `4px solid #fde68a`: ``}}} onClick={()=>scrollUp()}>{title}</NavLink>
               ))}
               <NavLink to={authenticationToken && user ? "/personal-account" : "/login"} className=' lg:bg-amber-200 lg:hover:bg-amber-300 py-4 lg:px-4 lg:py-3 hover:text-white text-center md:text-sm rounded-3xl transition-colors ease-in-out' style={({ isActive }) => {return {color: isActive && !webLinkDesign ? '#fde68a':''}}} onClick={()=>scrollUp()}>{user && authenticationToken ? `${user.firstname}'s Bookings`: `LOGIN / SIGNUP`}</NavLink>
             </div>

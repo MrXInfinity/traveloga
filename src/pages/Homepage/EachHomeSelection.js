@@ -21,8 +21,8 @@ const Selection = ({info, leftPosition}) => {
                   <div className="flex flex-col h-80 md:h-96 w-80 md:w-[400px] lg:w-[522px] shadow-lg hover:shadow-md hover:shadow-black rounded-[50px] lg:rounded-none overflow-hidden mr-11 last:mr-6 snap-start transition-all duration-300 ease-in-out" key={_id} onClick={()=>destinationToggleUI(_id)}>
                     <img src={image} alt={title} className='h-full lg:h-5/6 object-cover object-center'/>
                     <div className="flex h-fit pl-10 pr-4 py-3 md:px-4 md:py-4 justify-around lg:justify-between flex-col lg:flex-row">
-                      <h1 className='text-xl lg:text-2xl my-auto'>{title}</h1>
-                      <div className="flex text-black/80 lg:text-black/70">
+                      <h1 className='text-lg lg:text-2xl my-auto'>{title}</h1>
+                      <div className="flex text-black/70 lg:text-black/70">
                         <FontAwesomeIcon icon={faLocationDot} className='text-sm lg:text-2xl my-auto mr-1 lg:mr-2'/>
                         <h1 className='my-auto lg:text-xl'>{location}</h1>
                       </div>
