@@ -15,11 +15,11 @@ const LocationComponent = ({ flights, flightType, title, limitedOffers, regionsC
 
     return (
         <div className="flex flex-col col-span-4 lg:col-span-4 h-fit">
-            <div className="flex items-center mb-1">
-                <h2 className='text-sm'>LOCATION</h2>
+            <div className="flex items-center mb-1 text-lg">
+                <h2 >LOCATION</h2>
                 <FontAwesomeIcon icon={faPlane} className="text-[#2B8E9B] ml-2" />
             </div>
-            <p className='text-xs mb-1'>Pick the location you’re coming from. </p>
+            <p className='text-sm mb-1'>Pick the location you’re coming from. </p>
             {errors.travellingFromLocation && <p className="text-red-600 text-xs">{errors.travellingFromLocation.message}</p>}
             <div className="grid grid-cols-1 lg:grid-cols-1 gap-4 mt-2">
                 <div className="flex flex-col">

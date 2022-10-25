@@ -25,7 +25,7 @@ const HomeSelection = ({showCase}) => {
     useEffect(()=>{
         const data = async () => {
         try {
-            const {data} = await axios.get(`http://localhost:5000/api/v1/destinations?showCase=${showCase}`, {signal: controller.signal})
+            const {data} = await axios.get(`https://traveloga-api.onrender.com/api/v1/destinations?showCase=${showCase}`, {signal: controller.signal})
             setInfo(data.destinations)
         } catch (err) {
             console.log(err)
@@ -37,11 +37,11 @@ const HomeSelection = ({showCase}) => {
     
     return (
     <>
-        <div className=" sm:py-36 sm:pl-32 pl-6 py-16 flex flex-col w-full">
-            <div className="flex justify-between sm:pr-32">
+        <div className="md:py-36 md:pl-32 pl-6 py-16 flex flex-col w-full">
+            <div className="flex justify-between md:pr-32">
                 <div className="flex flex-col">
-                    <h1 className="font-['Spinnaker'] sm:text-xl sm:mb-2">Where to Go:</h1>
-                    <h1 className="font-['Rubik'] text-2xl sm:text-3xl sm:mb-4 mb-2">{`${showCase.toUpperCase()} DESTINATIONS`}</h1>
+                    <h1 className="md:text-xl mb-1 md:mb-2 text-black/90">Where to Go:</h1>
+                    <h1 className="font-['Rubik'] text-2xl md:text-3xl md:mb-4 mb-1">{`${showCase.toUpperCase()} DESTINATIONS`}</h1>
                 </div>
                 <div className=" hidden lg:flex lg:text-5xl">
                     {[[faArrowLeft, -1], [faArrowRight, 1]].map(([icon, number], index)=>(

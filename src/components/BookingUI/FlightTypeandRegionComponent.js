@@ -3,16 +3,16 @@ import { useFormContext } from "react-hook-form"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobe } from "@fortawesome/free-solid-svg-icons"
 
-const FlightypeAndRegionComponent = ({ flights, flightType, flightTypeClick, regionsCategory, regionsCategoryClick }) => {
+const FlightypeAndRegionComponent = ({ flights, flightType, flightTypeClick, regionsCategory, regionsCategoryClick, bookingRef }) => {
     const { register, formState: {errors}} = useFormContext()
     
     return (
         <div className="flex flex-col col-span-6 lg:col-span-8 lg:order-first">
-            <div className="flex items-center mb-1">
-                <h2 className='text-sm'>TYPE OF FLIGHT AND REGION</h2>
+            <div className="flex items-center mb-1 text-lg">
+                <h2>TYPE OF FLIGHT AND REGION</h2>
                 <FontAwesomeIcon icon={faGlobe} className="text-[#2B8E9B] ml-2" />
             </div>
-            <p className='text-xs mb-1'>Choose a type of flight, either DOMESTIC or INTERNATIONAL, and pick which region your coming.</p>
+            <p className='text-sm mb-1 break-words text-black/90'>Choose a flight type, (DOMESTIC/INTERNATIONAL), and pick which region your coming.</p>
             {errors.flightType && errors.regionsCategory ? <p className="text-red-600 text-xs">Fields (FlightType & Region Category) are required...</p>
             : errors.flightType ? <p className="text-red-600 text-xs">Field (FlightType) is required...</p> : errors.regionsCategory ? <p className="text-red-600 text-xs">Field (Regions Category) is required...</p>
             : ``}     

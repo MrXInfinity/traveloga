@@ -1,5 +1,5 @@
 import React, {useReducer, useRef} from 'react'
-import { faCompass, faBars, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons"
 
 const NavigationLogic = () => {
 

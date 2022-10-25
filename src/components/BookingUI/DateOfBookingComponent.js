@@ -9,11 +9,11 @@ const DateOfBookingComponent = ({dateOfLeave, dateOfReturn, setDateClick}) => {
 
     return (
         <div className="flex flex-col col-span-6 lg:col-span-4">
-            <div className="flex mb-1">
-                <h2 className='text-sm'>DATE</h2>
+            <div className="flex mb-1 items-center text-lg">
+                <h2 >DATE</h2>
                 <FontAwesomeIcon icon={faCalendarDays} className="text-[#2B8E9B] ml-2" />
             </div>
-            <p className="text-xs mb-1">Select the date of your return and leave.</p>
+            <p className="text-sm mb-1">Select the date of your return and leave.</p>
             {errors.dateOfLeave && errors.dateOfReturn ? <p className="text-red-600 text-xs">Return & Leave dates must be set.</p>
             : errors.dateOfReturn ? <p className="text-red-600 text-xs">Return dates must be set.</p> : errors.dateOfLeave ? <p className="text-red-600 text-xs">Leave dates must be set.</p>
             : ``}

@@ -1,18 +1,17 @@
 import axios from 'axios'
 import React, {useState, useEffect} from 'react'
-import { Controller } from 'react-hook-form'
+import EachBooking from './EachBooking'
 
 const BookingsList = ({bookingFilter}) => {
     const [listOfBookings, setListOfBookings] = useState(null)
     const controller = new AbortController();
     const authenticationToken = localStorage.getItem("authenticated")
     const bookingListData = ["Cart", "Booked", "Cancelled", "Refunded"]
-    console.log(listOfBookings)
-useEffect(()=> {
-        const fetchData = async () => {
+
+    const fetchData = async () => {
             try {
             const {data} = await axios.get(
-                "http://localhost:5000/api/v1/bookings", 
+                "https://traveloga-api.onrender.com/api/v1/bookings", 
                 { headers: { 'Authorization': `Bearer ${authenticationToken}` }},
                 {signal: controller.signal})
             setListOfBookings(data)
@@ -21,7 +20,8 @@ useEffect(()=> {
             console.log(err)
             }
         }
-
+    
+useEffect(()=> {
         fetchData()
         return () => controller.abort()
     }, [])
@@ -29,21 +29,24 @@ useEffect(()=> {
   return (
     <>
     {!bookingFilter ? bookingListData.map((title, index1)=>(
-        <div className="flex flex-col odd:bg-black/10" key={index1}>
-            <h1>{title}</h1>
-            {listOfBookings && listOfBookings.filter(eachBooking => eachBooking.status === title).map(({travellingTo}, index)=>(
-                <div className="flex">
-                    <img/>
-                </div>
+        <div className="flex flex-col gap-4 odd:bg-black/10 w-full p-4" key={index1}>
+            <h1 className='text-2xl'>{title.toUpperCase()}</h1>
+            <div className="grid grid-cols-1 grid-flow-row lg:grid-cols-2 gap-2">
+                {listOfBookings && listOfBookings.filter(eachBooking => eachBooking.status === title).map((eachBooking, index)=>(
+                <EachBooking {...{eachBooking, fetchData}} key={index}/>
             ))}
+            </div>
         </div>
     )) :  (
-        <div className="flex flex-col">
-            <h1>{bookingFilter.toUpperCase()}</h1>
-            {listOfBookings && listOfBookings.filter(eachBooking => eachBooking.status === bookingFilter).map(({travellingTo}, index)=>(
-            <h1 key={index}>{travellingTo}</h1>
-        ))}
-        </div>)}
+        <div className="flex flex-col gap-4 odd:bg-black/10 w-full p-4">
+            <h1 className='text-2xl'>{bookingFilter.toUpperCase()}</h1>
+            <div className="grid grid-cols-1 grid-flow-row lg:grid-cols-2 gap-2">
+            {listOfBookings && listOfBookings.filter(eachBooking => eachBooking.status === bookingFilter).map((eachBooking, index)=>(
+                <EachBooking {...{eachBooking, fetchData}} key={index}/>
+            ))}
+            </div>
+        </div>
+        )}
     </>
   )
 }

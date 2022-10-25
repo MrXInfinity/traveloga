@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, {useState, useEffect, useContext, createContext} from 'react'
 const AppContext = createContext()
 
@@ -7,12 +6,15 @@ const AppProvider = ({children}) => {
     const [isSuccessful, setIsSuccessful] = useState(false)
     const [isFailed, setIsFailed] = useState(false)
     const [isSignInRequired, setIsSignInRequired] = useState(false)
+    const [isAccountEditOpen,  setIsAccountEditOpen] = useState(false)
+    const [transitionOpen, setTransitionOpen] = useState(false)
     const [user, setUser] = useState(null)
+    
     const [bookingUI, setBookingUI] = useState({
         id: "",
         open: false
     })
-   
+
     const [destinationUI, setDestinationUI] = useState({
         id: "",
         open: false,
@@ -21,43 +23,12 @@ const AppProvider = ({children}) => {
     const userSignIn = (userInfo, token) => {
       setUser(userInfo)
       localStorage.setItem("authenticated", token);
+      console.log(userInfo, token)
     }
 
     const userSignOut = () => {
       setUser(null)
       localStorage.clear()
-    }
-
-    const destinationToggleUI = (id) => {
-        if (id) {
-            setDestinationUI({
-            id: id, 
-            open: !destinationUI.open})
-            return
-    }
-        setDestinationUI({
-            id: "", 
-            open: !destinationUI.open
-        })
-    }
-
-    const bookingToggleUI = (id) => {
-        if (destinationUI.open) {
-          setDestinationUI({
-            ...destinationUI,
-            open: false
-          })
-        }
-        if (id) {
-            setBookingUI({
-            id: id, 
-            open: !bookingUI.open})
-            return
-    }
-        setBookingUI({
-            id: "", 
-            open: !bookingUI.open
-        })
     }
 
     useEffect (()=>{
@@ -74,17 +45,19 @@ const AppProvider = ({children}) => {
       userSignIn,
       userSignOut,
       bookingUI,
+      setBookingUI,
       destinationUI,
-      destinationToggleUI,
-      bookingToggleUI,
+      setDestinationUI,
       isSuccessful,
       setIsSuccessful,
       isFailed,
       setIsFailed,
       isSignInRequired,
       setIsSignInRequired,
-      bookingUI,
-      setBookingUI
+      transitionOpen,
+      setTransitionOpen,
+      isAccountEditOpen,
+      setIsAccountEditOpen
     }
     
 
