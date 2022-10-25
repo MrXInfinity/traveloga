@@ -18,17 +18,17 @@ const Nav = () => {
 
   return (
     <div className='flex flex-col' ref={ref}>
-      <div className="flex w-full bg-black/40 px-5 py-8 md:px-12 md:py-6 xl:px-20 justify-between fixed top-0 z-10">
+      <div className="flex w-full bg-black/40 px-5 py-6 md:px-12 md:py-6 xl:px-20 justify-between fixed top-0 z-10">
         <div className="flex md:items-center">
-          <FontAwesomeIcon className='text-white mt-2 md:mt-0 text-4xl mr-4 lg:mr-2' icon={faCompass} />
+          <FontAwesomeIcon className='text-white mt-2 md:mt-0 text-2xl mr-4 lg:mr-2' icon={faCompass} />
           <div className=" flex-col w-40 md:w-fit">
-            <h1 className=' text-2xl md:text-xl text-white -mb-1'>TRAVELOGA</h1>
-            <h1 className=' text-sm md:text-xs text-white '>Experience Philippines, Love Philippines</h1>
+            <h1 className=' text-xl text-white -mb-1'>TRAVELOGA</h1>
+            <h1 className=' text-xs text-white '>Experience Philippines, Love Philippines</h1>
           </div>
         </div>
 
         <div className="flex lg:flex-row flex-col lg:w-1/2 justify-around">
-          <div className={`${mobileMenu} flex items-center justify-center w-16 h-14 rounded-2xl bg-amber-200`} onClick={() => openMenu()}>
+          <div className={`${mobileMenu} flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-200`} onClick={() => openMenu()}>
             <FontAwesomeIcon className="text-3xl transition-all duration-300 ease-in-out" icon={buttonIcon} />
           </div>
           
