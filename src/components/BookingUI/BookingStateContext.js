@@ -42,6 +42,7 @@ const useBookingState = () => {
     }
 
     const eachRegionClick = (eachRegion, location) => {
+        setValue("travellingFromRegion", eachRegion)
         if (eachRegion && location) {
             dispatch({
             type: "SET_EACHREGION",
@@ -50,20 +51,15 @@ const useBookingState = () => {
                 location
             }
         })
+        return
         }
-        else {
-            dispatch({type: "REMOVE_EACHREGION"})
-            console.log("hays")
-        }
-        
-        setValue("travellingFromRegion", eachRegion)
+        dispatch({type: "REMOVE_EACHREGION"})
     }
 
     const withHotelClick = () => {
         dispatch({type: "HOTEL_TOGGLE"})
         setValue("withHotel", !state.withHotel)
     }
-
     const setDateClick = (label, value) => {
         const localValue = new Date(value)
         if (label === "Leave") {
@@ -72,11 +68,12 @@ const useBookingState = () => {
                 clearErrors(["dateOfLeave", "dateOfReturn", "dateOfLeave_selectcorrectdate", "date_selectnewdate"])
                 dispatch({
                     type: "LEAVE_BUTTON_CLICK", 
-                    payload: localValue
+                    payload: localValue.getTime()
                 })
                 return
             } 
             setError("dateOfLeave_selectcorrectdate", {type: "Date", message: "Pick a date of leave that's more than a week of the current day."})
+            dispatch({type: "LEAVE_BUTTON_CLICK", payload: ""})
             return
         }
         if (label === "Return") {
@@ -88,7 +85,7 @@ const useBookingState = () => {
                 clearErrors(["dateOfLeave", "dateOfReturn", "dateOfReturn_selectcorrectdate", "date_selectnewdate"])
                 dispatch({
                     type: "RETURN_BUTTON_CLICK",
-                    payload: localValue
+                    payload: localValue.getTime()
                 })
                 return
             }
