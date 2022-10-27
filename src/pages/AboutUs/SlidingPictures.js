@@ -33,7 +33,7 @@ const SlidingPictures = () => {
 
   return (
     <div className='bg-white flex flex-col overflow-hidden w-full h-fit py-20 lg:py-24'>
-      <h1 className='text-center text-2xl font-["Rubik"]'>From our Customers:</h1>
+      <h1 className='text-center text-xl md:text-2xl font-["Rubik"]'>From our Customers:</h1>
       <div className={`flex flex-nowrap ml-52 lg:ml-96 transition-transform duration-1000 ease-in-out h-[650px] items-center`} style={{ transform: `translate3d(${-picIndex * 11.11}%, 0, 0)`, width: `${widthDefault * (aboutUsPictures.length)}px` }}>
         {aboutUsPictures.map(([img, caption], index) => (
           <div className={`flex h-5/6 w-80 ${index % 2 === 1 && `mt-auto`}`} key={index}>

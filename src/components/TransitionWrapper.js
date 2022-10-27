@@ -18,7 +18,7 @@ const TransitionWrapper = ({children}) => {
               leave="ease-in duration-200" 
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95">
-                <Dialog.Panel className=" flex ">
+                <Dialog.Panel className="flex justify-center">
                   {children}
                 </Dialog.Panel>
             </Transition.Child>

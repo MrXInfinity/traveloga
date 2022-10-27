@@ -33,17 +33,16 @@ const BookingUI = () => {
 
   const formSubmit = async data => {
     setIsLoading(true)
+    setBookingUI({id: "", open:false})
     try {
       const userData = await axios.post(
         `https://traveloga-api.onrender.com/api/v1/bookings/${id}`, 
         data,
         { headers: { 'Authorization': `Bearer ${authenticationToken}` }})
       setIsLoading(false)
-      setBookingUI({id: "", open:false})
       setIsSuccessful(true)
     } catch (err) {
       setIsLoading(false)
-      setBookingUI({id: "", open: false})
       if (err.response.data.msg = "Authentication Failed") {
         setIsSignInRequired(true)
         return

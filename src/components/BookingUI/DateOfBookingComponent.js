@@ -14,7 +14,7 @@ const DateOfBookingComponent = ({dateOfLeave, dateOfReturn, setDateClick}) => {
             {errors.date_selectnewdate && <p className="text-red-600 text-xs">{errors.date_selectnewdate.message}</p>}
             {errors.dateOfLeave_selectcorrectdate && <p className="text-red-600 text-xs">{errors.dateOfLeave_selectcorrectdate.message}</p>}
             {errors.dateOfReturn_selectcorrectdate && <p className="text-red-600 text-xs">{errors.dateOfReturn_selectcorrectdate.message}</p>}
-            <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 mt-2">
+            <div className="grid grid-cols-2 lg:grid-cols-1 gap-3 md:gap-4 mt-2">
             {
                 ["Leave", "Return"].map((label, index) => {
                     return (

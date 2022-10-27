@@ -72,10 +72,10 @@ const DestinationContent = () => {
                                     <div className="group-hover:bg-black/50 w-full h-full absolute transition-colors ease-in-out duration-300"></div>
                                 </div>
                                 <div className="flex items-center px-2">
-                                    <FontAwesomeIcon className="text-amber-200 text-4xl" icon={faMapPin} />
-                                    <div className="flex flex-col mt-2 ml-4">
-                                        <h1 className="text-xl md:text-xl whitespace-nowrap">{title}</h1>
-                                        <h2 className="text-black/70 text-sm md:text-lg">{location}</h2>
+                                    <FontAwesomeIcon className="text-[#2B8E9B] text-3xl md:text-4xl" icon={faMapPin} />
+                                    <div className="flex flex-col mt-2 ml-3 md:ml-4">
+                                        <h1 className="text-lg md:text-xl whitespace-nowrap">{title}</h1>
+                                        <h2 className="text-black/70 text-xs md:text-sm">{location}</h2>
                                     </div>
                                 </div>
                             </div>
