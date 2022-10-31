@@ -23,7 +23,6 @@ const AppProvider = ({children}) => {
     const userSignIn = (userInfo, token) => {
       setUser(userInfo)
       localStorage.setItem("authenticated", token);
-      console.log(userInfo, token)
     }
 
     const userSignOut = () => {
