@@ -29,8 +29,8 @@ useEffect(()=> {
   return (
     <>
     {!bookingFilter ? bookingListData.map((title, index1)=>(
-        <div className="flex flex-col gap-4 odd:bg-black/10 w-full p-4" key={index1}>
-            <h1 className='text-2xl'>{title.toUpperCase()}</h1>
+        <div className="flex flex-col gap-4 odd:bg-black/10 w-full p-4" key={index1} >
+            <h1 className='text-xl md:text-2xl'>{title.toUpperCase()}</h1>
             <div className="grid grid-cols-1 grid-flow-row lg:grid-cols-2 gap-2">
                 {listOfBookings && listOfBookings.filter(eachBooking => eachBooking.status === title).map((eachBooking, index)=>(
                 <EachBooking {...{eachBooking, fetchData}} key={index}/>
@@ -38,7 +38,7 @@ useEffect(()=> {
             </div>
         </div>
     )) :  (
-        <div className="flex flex-col gap-4 odd:bg-black/10 w-full p-4">
+        <div className="flex flex-col gap-4 odd:bg-black/10 w-full p-4" >
             <h1 className='text-2xl'>{bookingFilter.toUpperCase()}</h1>
             <div className="grid grid-cols-1 grid-flow-row lg:grid-cols-2 gap-2">
             {listOfBookings && listOfBookings.filter(eachBooking => eachBooking.status === bookingFilter).map((eachBooking, index)=>(

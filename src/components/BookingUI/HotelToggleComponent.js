@@ -5,7 +5,6 @@ import { faHotel } from "@fortawesome/free-solid-svg-icons"
 
 const HotelToggleComponent = ({withHotel, withHotelClick}) => {
     const { formState: {errors}} = useFormContext()
-    console.log(errors)
     
     return (
         <div className="flex flex-col col-span-2 lg:col-span-2 lg:row-span-2 lg:-order-1">

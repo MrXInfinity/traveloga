@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import AccountUIComponent from './AccountUIComponent'
 import BookingsList from './BookingsList'
 import BookingNavigation from './BookingNavigation'
@@ -11,6 +11,7 @@ const PersonalAccount = () => {
   const authenticationToken = localStorage.getItem("authenticated")
   const [bookingFilter, setBookingFilter] = useState("")
   const navigate = useNavigate()
+  const accountCartRef = useRef(null)
 
   useEffect(() => {
     if (!user || !authenticationToken) {
@@ -22,14 +23,14 @@ const PersonalAccount = () => {
 
   return (
   <>
-  <div className="flex">
-      <BookingNavigation {...{bookingFilter, setBookingFilter}} />
-      <div className="flex flex-col w-full">
-        <AccountUIComponent />
-        <BookingsList {...{bookingFilter}} />
+    <div className="flex">
+        <BookingNavigation {...{bookingFilter, setBookingFilter, accountCartRef}} />
+        <div className="flex flex-col w-full">
+          <AccountUIComponent {...{accountCartRef}}/>
+          <BookingsList {...{bookingFilter }} />
+        </div>
       </div>
-    </div>
-    <TransitionComponent />
+      <TransitionComponent />
     </>
   )
 }

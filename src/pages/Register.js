@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { useGlobalContext } from '../context'
@@ -9,7 +9,8 @@ import TransitionComponent from '../components/TransitionWrapper'
 
 const Register = () => {
   const [typeIsPassword, setTypeisPassword] = useState(true)
-  const {setIsLoading, setTransitionOpen} = useGlobalContext()
+  const {user, setIsLoading, setTransitionOpen} = useGlobalContext()
+  const authenticationToken = localStorage.getItem("authenticated")
   const navigate = useNavigate()
   const {register, handleSubmit, formState: {errors}} = useForm({
     firstname: "",
@@ -63,6 +64,12 @@ const Register = () => {
     }
     
   }
+
+  useEffect(()=>{
+    if (user && authenticationToken) {
+      navigate("/")
+    }
+  }, [user, authenticationToken])
 
   return (
     <>
