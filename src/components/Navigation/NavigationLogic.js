@@ -38,10 +38,10 @@ const NavigationLogic = () => {
         dispatch({ 
             type: "RESIZE",
             payload: {
-                dropdown: window.innerWidth < 1023 ? "hidden" : "block",
-                mobileMenu: window.innerWidth < 1023 ? "block" : "hidden", 
-                navPosition: window.innerWidth < 1023 ? "absolute" : "relative",
-                webLinkDesign: window.innerWidth < 1023 ? false : true
+                dropdown: window.innerWidth < 768 ? "hidden" : "block",
+                mobileMenu: window.innerWidth < 768 ? "block" : "hidden", 
+                navPosition: window.innerWidth < 768 ? "absolute" : "relative",
+                webLinkDesign: window.innerWidth < 768 ? false : true
             }
         })
     };

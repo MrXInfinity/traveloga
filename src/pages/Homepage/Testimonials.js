@@ -26,7 +26,7 @@ const Testimonials = () => {
 
   return (
     <div className='flex justify-center h-[520px] w-full bg-[url("https://images.unsplash.com/photo-1580646556945-cbdd9ae320fd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80")] bg-cover lg:bg-none lg:bg-white '>
-      <div className="flex  lg:h-1/3 lg:max-w-[1290px] lg:bg-black/[0.80] lg:pt-12 lg:px-12">
+      <div className="flex md:justify-center lg:h-1/3 lg:max-w-[1290px] lg:bg-black/[0.80] lg:pt-12 lg:px-12">
         <div className="flex flex-col text-white md:max-w-none md:w-2/3 lg:w-1/2 mx-4 md:mt-12 lg:mt-0 p-8 lg:p-0 bg-black/[0.80] lg:bg-transparent place-self-center lg:place-self-auto lg:justify-start">
           <h1 className='md:text-lg font-["Rubik"] text-center lg:text-left mb-2 lg:mb-7'>TESTIMONIALS</h1>
           <h2 className='text-xl md:text-4xl  text-center lg:text-left mb-4 lg:mb-16'>What People Say About Our Services</h2>
