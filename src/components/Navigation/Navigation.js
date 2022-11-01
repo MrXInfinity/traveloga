@@ -8,13 +8,9 @@ import Footer from '../Footer/Footer'
 import { useGlobalContext } from '../../context'
 
 const Nav = () => {
-  const {dropdown, mobileMenu, buttonIcon, navPosition, webLinkDesign, openMenu, showMenu, ref, scrollUp} = NavigationLogic()
+  const {dropdown, mobileMenu, buttonIcon, navPosition, webLinkDesign, openMenu, ref, scrollUp} = NavigationLogic()
   const {user} = useGlobalContext()
   const authenticationToken = localStorage.getItem("authenticated")
-
-  useEffect(() => {
-    showMenu();
-  }, []);
 
   return (
     <div className='flex flex-col' ref={ref}>

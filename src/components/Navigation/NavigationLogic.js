@@ -1,4 +1,4 @@
-import React, {useReducer, useRef} from 'react'
+import {useReducer, useLayoutEffect, useRef} from 'react'
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons"
 
 const NavigationLogic = () => {
@@ -35,6 +35,7 @@ const NavigationLogic = () => {
     };
 
     const showMenu = () => {
+        console.log("doing show menu func")
         dispatch({ 
             type: "RESIZE",
             payload: {
@@ -51,7 +52,12 @@ const NavigationLogic = () => {
     ref.current?.scrollIntoView({behavior: 'smooth'});
     };
 
+    useLayoutEffect(() => {
+    
     window.addEventListener('resize', showMenu);
+    showMenu();
+    return () => window.removeEventListener('resize', showMenu);
+  }, []);
 
     const value = {
         dropdown: state.dropdown,
