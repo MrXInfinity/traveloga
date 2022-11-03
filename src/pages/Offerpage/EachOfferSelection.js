@@ -14,8 +14,8 @@ const EachOfferSelection = ({image, title, location, description, limitedOffers,
     }
 
   return (
-    <div className="flex flex-col md:flex-row md:gap-4 font-['Spinnaker'] h-fit md:h-[400px] lg:h-72 xl:h-[20rem] shadow-md shadow-black/[0.8] md:shadow-none md:rounded-none overflow-hidden justify-around" key={_id}>
-        <img className='h-2/5 md:h-full w-full md:w-1/2 xl:w-[110%] xl:max-w-[620px] object-cover object-center' src={image} alt={title}/>
+    <div className="flex flex-col md:flex-row md:gap-4 font-['Spinnaker'] h-fit md:h-[400px] lg:h-72 max-w-4xl shadow-md shadow-black/[0.8] md:shadow-none md:rounded-none overflow-hidden justify-around md:justify-between" key={_id}>
+        <img className='h-2/5 max-h-60 md:max-h-fit md:h-full w-full md:w-1/2 lg:w-[80vw] lg:max-w-[450px] object-cover object-center' src={image} alt={title}/>
         <div className="flex flex-col h-3/5 md:h-full lg:justify-between lg:py-4 xl:py-6 lg:pl-8">
             <div className="flex flex-col h-3/4 md:h-3/4 lg:h-fit p-4 lg:p-0 text-black/[0.9] justify-around lg:justify-start">
                 <div className="flex items-end mb-1 md:mb-4 ">

@@ -1,24 +1,27 @@
 import axios from "axios"
 import React, {useState, useEffect} from 'react'
 import EachOfferSelection from './EachOfferSelection'
+import { useGlobalContext } from "../../context"
 
 const OfferSelection = () => {
-
+  const {setTransitionOpen, setIsLoading} = useGlobalContext()
   const [info, setInfo] = useState([])
   const controller = new AbortController()
 
   useEffect(()=> {
     const dataFetch = async () => {
+      setTransitionOpen(true)
+      setIsLoading(true)
     try {
       const {data} = await axios.get(`https://traveloga-api.onrender.com/api/v1/destinations?limitedOffers=true`, {signal: controller.signal})
       setInfo(data)
+      setIsLoading(false)
+      setTransitionOpen(false)
     } catch (err) {
-      if(axios.isCancel(err)){
-        console.log("fetch cancelled!")
-      }
-      else {
-        console.log(err)
-      }
+      setIsLoading(false)
+      setTransitionOpen(false)
+      if(axios.isCancel(err))return console.log("fetch cancelled!")
+      alert(err.response.data.msg)
     }
   }
     dataFetch()
@@ -40,7 +43,7 @@ const OfferSelection = () => {
     )
   }
   return (
-    <div>
+    <div className="w-5/6 mx-auto bg-black/20 text-center text-2xl text-white py-4 mb-8 lg:mb-20 ">
       No offers...
     </div>
   )
