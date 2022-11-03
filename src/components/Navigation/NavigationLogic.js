@@ -35,7 +35,6 @@ const NavigationLogic = () => {
     };
 
     const showMenu = () => {
-        console.log("doing show menu func")
         dispatch({ 
             type: "RESIZE",
             payload: {
