@@ -25,7 +25,7 @@ const AboutUsPage = () => {
 
   return (
     <>
-      <div className='flex h-[93vh] lg:h-screen bg-cover bg-no-repeat bg-fixed bg-[url("https://images.pexels.com/photos/3698534/pexels-photo-3698534.jpeg?cs=srgb&dl=pexels-john-renzo-aledia-3698534.jpg&fm=jpg")]'>
+      <div className='flex h-[93vh] lg:h-screen bg-cover bg-no-repeat bg-fixed' style={{backgroundImage: `url("/images/aboutuspage-heropic.avif")`}}>
         <div className="flex flex-col items-center text-center md:items-start md:text-left h-fit md:h-full py-8 px-8 sm:py-16 md:py-12 place-self-end md:place-self-start md:w-1/2 md:mt-24 bg-[#423F3F]/90">
           <h1 className='font-["Rubik"] md:text-xl text-amber-200 mb-4 sm:mb-6'>ABOUT US</h1>
           <p className='text-white text-2xl sm:text-4xl md:text-6xl mb-6 sm:mb-10 md:mb-8'>EXPERIENCE PHILIPPINES, <br className='md:block hidden'/>LOVE PHILIPPINES</p>

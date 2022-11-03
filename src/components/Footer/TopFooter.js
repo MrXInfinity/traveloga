@@ -29,15 +29,15 @@ const TopFooter = () => {
 
   return (
     <section className='bg-[#34abbb] py-6 md:py-12 xl:py-16 text-white '>
-      <div className="flex flex-col w-4/5 lg:w-3/4 mx-auto text-center">
+      <div className="flex flex-col w-4/5 sm:3/4 lg:w-3/4 mx-auto text-center">
         <p className='md:text-lg lg:text-xl '>TRAVEL. As much as you can. As far as you can. As long as you can. <br className="hidden lg:block"/>Life's not meant to be lived in one place.</p>
         <h1 className='md:text-lg lg:text-xl mt-2 lg:mt-4'>Martin Moodie</h1>
         <p className='text-xs  mt-4 lg:mt-6'>Subscribe now to be aware of our future promos and possible changes to our services</p>
-        <form className='flex w-full lg:w-3/4 md:mx-auto bg-white text-black px-3 md:px-6 py-2 md:py-3 rounded-2xl lg:rounded-none justify-between items-center mt-4 lg:mt-4' onSubmit={handleSubmit(formSubmit)}>
-          <input className='bg-transparent py-1 md:py-0 md:text-lg w-3/4 lg:w-4/5 lg:mr-4' type="email" {...register("email")}/>
-          <button type="submit" className='flex items-center py-3 md:py-1 px-4 md:px-6 bg-amber-200 rounded-xl lg:rounded-none hover:text-white hover:bg-amber-300 transition-colors duration-300 ease-in-out'>
-            <h1 className='hidden md:block mr-2 md:m-0'>SUBMIT</h1>
-            <FontAwesomeIcon className="text-2xl md:hidden" icon={faPaperPlane} />
+        <form className='flex w-full lg:w-3/4 md:mx-auto bg-white text-black px-2 md:px-6 py-1 md:py-2 justify-between items-center mt-4' onSubmit={handleSubmit(formSubmit)}>
+          <input className='bg-transparent py-0 md:py-0 text-sm md:text-base w-3/4 lg:w-4/5 lg:mr-4' type="email" {...register("email")}/>
+          <button type="submit" className='flex items-center py-2 md:py-1 px-4 md:px-6 bg-amber-200 hover:text-white hover:bg-amber-300 transition-colors duration-300 ease-in-out'>
+            <h1 className='hidden sm:block'>SUBMIT</h1>
+            <FontAwesomeIcon className="text-lg sm:hidden" icon={faPaperPlane} />
           </button>
         </form>
       </div>

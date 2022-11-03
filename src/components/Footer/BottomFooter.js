@@ -31,8 +31,8 @@ const BottomFooter = () => {
     }
 
     return (
-    <section className='flex flex-col md:flex-row-reverse w-full bg-[#2B8E9B] py-8 px-14 lg:px-14 lg:py-8 items-center md:items-start'>
-        <form className='flex flex-col w-full lg:w-2/3 md:pl-4 xl:pl-8 lg:md-0' onSubmit={handleSubmit(formSubmit)}>
+    <section className='flex flex-col md:flex-row-reverse w-full bg-[#2B8E9B] py-8 mx-auto lg:px-14 lg:py-8 items-center md:items-start'>
+        <form className='flex flex-col w-4/5 md:w-full lg:w-2/3 md:pl-4 xl:pl-8 lg:md-0' onSubmit={handleSubmit(formSubmit)}>
             <div className="grid grid-rows-4 lg:grid-rows-3 grid-flow-col gap-4 h-full mb-4 ">
                 {[["text", "Name", "name"], ["email", "Email", "email"], ["text", "Subject", "subject"], ["paragraph", "Message", "message"]].map(([type, placeholder, inputName], index)=>(
                 <input className='last:lg:row-span-3 bg-transparent border-2 border-white hover:border-amber-200 p-4 placeholder:italic placeholder:text-slate-400 transition duration-300 ease-in-out' {...register(inputName)} type={type} placeholder={placeholder} key={index} />
@@ -40,7 +40,7 @@ const BottomFooter = () => {
             </div>
             <button className='text-amber-200 hover:text-amber-300 translation-all duration-300 ease-in-out md:text-right' type="submit">Submit</button>
         </form>
-        <div className="flex flex-col lg:w-1/3 mt-6 md:mt-0 items-center md:items-start">
+        <div className="flex flex-col w-4/5 lg:w-1/3 mt-6 md:mt-0 items-center md:items-start">
             <div className="flex lg:items-center">
                 <FontAwesomeIcon className='text-white text-2xl md:text-3xl mt-1 mr-2' icon={faCompass} />
                 <div className="text-white flex-col w-40 md:w-fit">
