@@ -23,7 +23,7 @@ const Nav = () => {
           </div>
         </div>
 
-        <div className="flex md:flex-row flex-col md:w-fit justify-around">
+        <div className="flex md:flex-row flex-col md:w-fit lg:w-1/2 justify-around">
           <div className={`${mobileMenu} flex items-center justify-center w-14 h-14 rounded-2xl bg-amber-200`} onClick={() => openMenu()}>
             <FontAwesomeIcon className="text-3xl transition-all duration-300 ease-in-out" icon={buttonIcon} />
           </div>

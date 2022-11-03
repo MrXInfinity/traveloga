@@ -25,9 +25,9 @@ const Testimonials = () => {
   }
 
   return (
-    <div className='flex justify-center h-[600px] w-full bg-cover bg-no-repeat md:!bg-none' style={{backgroundImage: `url("/images/testimonial.avif")`}}>
-      <div className="flex md:justify-center md:h-[120px] lg:h-[220px] lg:max-w-[1290px] md:bg-black/[0.80] lg:pt-12 lg:px-12">
-        <div className="flex flex-col text-white md:max-w-lg md:w-full lg:w-1/2 mx-4 md:mx-0 md:mt-0 lg:mt-0 p-8 md:pr-0 lg:p-0 bg-black/[0.80] md:bg-transparent place-self-center md:place-self-auto md:justify-start">
+    <div className='flex justify-center md:h-[432px] lg:h-[568px] bg-cover bg-no-repeat md:!bg-none md:mb-24' style={{backgroundImage: `url("/images/testimonial.avif")`}}>
+      <div className="flex md:justify-center h-[650px] md:h-[120px] lg:h-[220px] md:w-full lg:max-w-[1290px] md:bg-black/[0.80] md:pt-8 lg:pt-12 md:px-14 lg:px-12 gap-8 lg:gap-12 ">
+        <div className="flex flex-col text-white h-fit max-w-sm md:max-w-lg md:w-full p-8 md:p-0 bg-black/[0.80] md:bg-transparent md:justify-start place-self-center md:place-self-start">
           <h1 className='font-["Rubik"] md:text-lg text-center lg:text-left mb-2 lg:mb-7'>TESTIMONIALS</h1>
           <h2 className='text-xl md:text-2xl lg:text-4xl text-center lg:text-left mb-4 md:mb-12 lg:mb-16 md:whitespace-nowrap lg:whitespace-normal'>What People Say About Our Services</h2>
           <p className=' text-justify text-sm lg:text-base md:text-black mb-6 lg:mb-8 lg:h-[100px]'>{message}</p>
@@ -43,7 +43,7 @@ const Testimonials = () => {
             ))}
           </div>
         </div>
-        <img className='hidden md:block md:w-[300px] lg:w-[400px] md:h-[400px] lg:h-[520px] object-cover object-center md:m-8 lg:mt-0' src="images/testimonial.avif" alt="Picture of a Beach" />
+        <img className='hidden md:block md:w-[300px] lg:w-[400px] md:h-[400px] lg:h-[520px] object-cover object-center' src="images/testimonial.avif" alt="Picture of a Beach" />
       </div>
     </div>
   )
