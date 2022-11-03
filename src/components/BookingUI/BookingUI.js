@@ -79,18 +79,18 @@ const BookingUI = () => {
   const {title, limitedOffers, domestic, international} = bookingInfo
   return (
     <FormProvider {...form}>
-      <div className="flex flex-row-reverse h-[93vh] w-full md:w-3/4 lg:w-11/12 max-w-[1000px] bg-white">
+      <div className="flex flex-row-reverse h-fit max-h-[93vh] w-full md:w-fit max-w-xl md:max-w-4xl bg-white">
         <FontAwesomeIcon className='z-10 text-3xl md:text-4xl absolute p-6 lg:p-2 xl:p-6 ml-auto mb-auto lg:mr-1 text-black/50 transition-color duration-150 ease-in-out hover:text-black' icon={faXmark} onClick={() => closeBookingUI()}/>
-        <form className="flex flex-col bg-white p-6 lg:py-6" onSubmit={handleSubmit(formSubmit)}>
+        <form className="flex flex-col bg-white p-6 md:py-6" onSubmit={handleSubmit(formSubmit)}>
           <h1 className='font-["Rubik"] text-xl lg:text-2xl mb-1 md:mb-2'>PLANE BOOKING</h1>
-          <div className="grid grid-cols-6 gap-x-3 gap-y-2 md:gap-3 content-start h-full md:h-fit lg:grid-cols-10">
+          <div className="grid grid-cols-6 gap-x-3 gap-y-2 md:gap-3 content-start h-full md:h-fit md:grid-cols-10">
             <FlightypeAndRegionComponent flights={airportsData} {...{flightType, flightTypeClick, regionsCategory, regionsCategoryClick, bookingRef}}/>
             <LocationComponent flights={airportsData} {...{flightType, regionsCategory, title, limitedOffers, eachRegion, eachRegionClick}} />
             <HotelToggleComponent {...{withHotel, withHotelClick}}/>
             <DateOfBookingComponent {...{dateOfLeave, dateOfReturn, setDateClick}} />
             <PriceComponent {...{limitedOffers, domestic, international, dateOfLeave, dateOfReturn, flightType, withHotel, eachRegion, initialAmount, initialAmountSet, discount, discountSet, amount, amountSet}}/>
           </div>
-          <button className="flex items-center justify-center bg-amber-200 col-span-6 py-3 lg:mt-4 rounded-lg mt-auto" type="submit">
+          <button className="flex items-center justify-center bg-amber-200 col-span-6 py-3 md:mt-4 rounded-lg mt-auto" type="submit">
             <FontAwesomeIcon className="text-3xl mr-4" icon={faCartFlatbedSuitcase} />
             <h1 className='text-lg'>BOOK FLIGHT</h1>
           </button>

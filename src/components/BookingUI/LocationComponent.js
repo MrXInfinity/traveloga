@@ -14,7 +14,7 @@ const LocationComponent = ({ flights, flightType, title, limitedOffers, regionsC
     }
 
     return (
-        <div className="flex flex-col col-span-4 lg:col-span-4 h-fit">
+        <div className="flex flex-col col-span-4 md:col-span-4 h-fit">
             <h2 className="md:mb-1 md:text-lg">LOCATION</h2>
             <p className='text-xs md:text-sm mb-1'>Pick the location you’re coming from. </p>
             {errors.travellingFromLocation && <p className="text-red-600 text-xs">{errors.travellingFromLocation.message}</p>}

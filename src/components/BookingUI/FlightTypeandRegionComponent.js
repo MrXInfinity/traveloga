@@ -5,7 +5,7 @@ const FlightypeAndRegionComponent = ({ flights, flightType, flightTypeClick, reg
     const { register, formState: {errors}} = useFormContext()
     
     return (
-        <div className="flex flex-col col-span-6 lg:col-span-8 lg:order-first">
+        <div className="flex flex-col col-span-6 md:col-span-8 md:order-first">
             <h2 className="md:mb-1 md:text-lg">TYPE OF FLIGHT AND REGION</h2>
             <p className='text-xs md:text-sm mb-1 break-words text-black/90'>Choose a flight type, (DOMESTIC/INTERNATIONAL), then pick which region your coming.</p>
             {errors.flightType && errors.regionsCategory ? <p className="text-red-600 text-xs">Fields (FlightType & Region Category) are required...</p>

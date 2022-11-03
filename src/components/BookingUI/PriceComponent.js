@@ -19,7 +19,7 @@ const PriceComponent = ({limitedOffers, domestic, international, dateOfLeave, da
     }, [initialAmount])
     
     return (
-        <div className="flex flex-col col-span-6 lg:col-span-10 lg:order-last">
+        <div className="flex flex-col col-span-6 md:col-span-10 md:order-last">
             {[["Initial Amount", initialAmount], ["Promo Discount", discount], ["Final Amount", amount]].map(([title, localAmount], index) => (
                 <div className="flex justify-between first:text-black/[0.6] text-red-600 last:text-[#2B8E9B] last:text-xl lg:last:text-2xl " key={index}>
                     <h1 className='text-black text-sm md:text-base'>{title}</h1>
