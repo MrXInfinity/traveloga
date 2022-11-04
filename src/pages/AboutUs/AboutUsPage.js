@@ -56,7 +56,7 @@ const AboutUsPage = () => {
       </div>
       
       <SlidingPictures />
-      <div className="flex bg-center bg-no-repeat bg-cover bg-[url('https://images.pexels.com/photos/3876332/pexels-photo-3876332.jpeg?cs=srgb&dl=pexels-tomas-anunziata-3876332.jpg&fm=jpg')]">
+      <div className="flex bg-center bg-no-repeat bg-cover" style={{backgroundImage: `url("/images/progressivility.avif")`}}>
         <div className="flex flex-col w-full bg-[#423F3F]/80 text-white p-8 md:py-14 lg:py-16 md:px-16">
           <h1 className='text-xl md:text-2xl lg:text-3xl font-["Rubik"] max-w-7xl mb-4'>PROGRESSIVILITY</h1>
           <p className='mb-4 text-sm md:text-base lg:text-lg max-w-7xl text-justify'>For the last 8 years, we have become a well-known and reliable company globally. We have also expanded our services from local to global. In this way, we made the Philippines more discoverable and reachable for those inside and outside of the country.</p>

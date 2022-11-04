@@ -73,8 +73,8 @@ const Register = () => {
 
   return (
     <>
-    <div className='flex w-full h-[93vd] md:h-screen bg-cover bg-no-repeat bg=center text-white font-["Spinnaker"] bg-[url("https://images.pexels.com/photos/4673637/pexels-photo-4673637.jpeg?cs=srgb&dl=pexels-rye-bon-4673637.jpg&fm=jpg")]'>
-      <div className="flex flex-col md:w-full bg-gradient-to-r from-black/70 via-black/50 py-8 lg:py-6 px-6 lg:px-8">
+    <div className='flex w-full h-[93vh] md:h-screen bg-cover bg-no-repeat bg-center text-white' style={{backgroundImage: `url("/images/login-register-pic.avif")`}}>
+      <div className="flex flex-col w-full bg-gradient-to-r from-black/80 lg:from-black/70 via-black/70 md:via-black/70 lg:via-black/70 to-black/30 md:to-black/10 lg:to-transparent py-8 lg:py-6 px-6 lg:px-8">
         <div className="flex md:items-center">
         <FontAwesomeIcon className='text-white mt-2 md:mt-0 text-2xl mr-4 lg:mr-2' icon={faCompass} />
         <div className=" flex-col w-40 md:w-fit">
@@ -82,33 +82,34 @@ const Register = () => {
           <h1 className=' text-xs text-white '>Experience Philippines, Love Philippines</h1>
         </div>
       </div>
-        <div className="flex flex-col mx-4 lg:ml-12 mt-10 lg:mt-8 lg:w-7/12 h-full">
-          <h1 className='font-["Rubik"] text-xl md:text-2xl mb-1'>CREATING A NEW ACCOUNT</h1>
-          <p className='text-sm md:text-base mb-6'>Already have an account? <span><Link to="/login" className='text-amber-200 hover:border-b-2 border-amber-200 inline h-fit transition-all duration-300 ease-in-out'>LOG IN</Link></span></p>
-          <form className="flex flex-col lg:grid lg:grid-cols-2 gap-4 h-full" onSubmit={handleSubmit(submit)}>
-            {formInputData.map(({title, inputName, icon, type, maxLength}, index)=>(
-              <div className="grid grid-cols-2 grid-flow-row" key={index}>
-                <label className={`md:text-lg ${index > 1 && `lg:col-span-2`}`} >{title}</label>
-                {errors[inputName] && <p className='text-red-600 text-sm text-center'>{errors[inputName].message}</p>}
-                  <div className="flex col-span-2 bg-white px-4 py-2 rounded-lg mt-2 lg:mt-3 items-center">
-                    <input className='w-full bg-transparent md:text-lg lg:text-base py-1 text-black' type={!type ? typeIsPassword ? "password" : "text" : type} {...register(inputName, 
-                      {required: `This field is required.`, 
-                      minLength: {
-                        value: 2,
-                        message: "Add more characters."
-                      },
-                      maxLength: {
-                        value: maxLength | 15,
-                        message: "Too much characters."
-                      }
-                      })}/>
-                    <FontAwesomeIcon className={`text-2xl ml-4 ${icon === faEye ? `text-amber-200`: `text-black`}`} icon={icon} onClick={()=>!type && setTypeisPassword(prev=>!prev)}/>
-                  </div>
-              
+        <div className="flex flex-col mx-4 md:ml-8 lg:ml-12 mt-10 md:mt-12 lg:w-7/12 max-w-xl lg:max-w-2xl h-full">
+          <h1 className='font-["Rubik"] text-xl md:text-2xl mb-2 md:mb-3'>CREATING A NEW ACCOUNT</h1>
+          <p className='text-sm md:text-base mb-6 md:mb-8'>Already have an account? <span><Link to="/login" className='text-amber-200 hover:border-b-2 border-amber-200 inline h-fit transition-all duration-300 ease-in-out'>LOG IN</Link></span></p>
+          <form className="flex flex-col md:grid md:grid-cols-2 md:grid-flow-row gap-4 h-full max-w-xl md:max-w-2xl" onSubmit={handleSubmit(submit)}>
+          {formInputData.map(({title, inputName, icon, type, maxLength}, index)=>(
+            <div className={`flex flex-col col-span-2 first:col-span-1 ${inputName === "lastname" && `col-span-1`}`} key={index}>
+              <div className="flex items-center justify-between">
+                <label className='md:text-lg' >{title}</label>
+                {errors[inputName] && <p className='text-red-600 text-sm text-right'>{errors[inputName].message}</p>}
               </div>
-            ))}
-            <div className="grid grid-cols-2 lg:col-span-2 gap-4 lg:gap-12 mt-4 md:mt-auto">
-              <Link className="flex py-4 px-2 md:p-4 bg-[#2B8E9B]/30 hover:bg-[#2B8E9B]/50 justify-center items-center transition-all ease-in-out" to="/">RETURN HOME</Link>
+              <div className="flex col-span-2 bg-white px-4 py-2 rounded-lg mt-2 lg:mt-3 items-center">
+                <input className='w-full bg-transparent md:text-lg lg:text-base py-1 md:py-0 text-black' type={!type ? typeIsPassword ? "password" : "text" : type} {...register(inputName, 
+                  {required: `This field is required.`, 
+                  minLength: {
+                    value: 2,
+                    message: "Add more characters."
+                  },
+                  maxLength: {
+                    value: maxLength | 15,
+                    message: "Too much characters."
+                  }
+                })}/>
+                <FontAwesomeIcon className={`text-2xl ml-4 ${icon === faEye ? `text-amber-200`: `text-black`}`} icon={icon} onClick={()=>!type && setTypeisPassword(prev=>!prev)}/>
+              </div>
+            </div>
+          ))}
+            <div className="grid grid-cols-2 md:col-span-2 gap-4 lg:gap-12 mt-4 md:mb-4 md:self-end">
+              <Link className="flex py-4 px-2 md:p-4 bg-[#2B8E9B]/30 hover:bg-[#2B8E9B]/50 justify-center items-center transition-all ease-in-out text-center" to="/">RETURN HOME</Link>
               <button className="flex bg-amber-200 hover:bg-amber-300 py-4 px-2 md:p-4 justify-center items-center transition-all ease-in-out">CREATE ACCOUNT</button>
             </div>
           </form>
