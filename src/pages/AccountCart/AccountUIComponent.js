@@ -32,7 +32,7 @@ const AccountUIComponent = ({accountCartRef}) => {
     }, [user])
 
   return (
-    <div className="text-sm md:text-base text-center w-full md:w-fit md:ml-4 h-fit bg-[#423F3F] grid grid-cols-5 md:flex md:gap-6 grid-flow-row gap-3 justify-center items-center p-4 mt-28 md:mb-12" ref={accountCartRef}>
+    <div className="text-sm md:text-base text-center w-full max-w-md sm:w-fit mx-auto md:ml-4 h-fit bg-[#423F3F] grid grid-cols-5 md:flex md:gap-6 grid-flow-row gap-3 justify-center items-center p-4 mt-28 md:mb-4" ref={accountCartRef}>
       <h1 className='text-white col-span-2 break-words'>{localUser ? `${localUser.firstname}, ${localUser.lastname}` : `username`}</h1>
       <h1 className='text-white break-all col-span-2 text-justify'>{localUser ? localUser.email : `email`}</h1>
       <button className='bg-amber-200 h-full py-4 md:p-2 md:px-4 flex flex-col justify-center items-center hover:bg-amber-300 transition duration-300 ease-in-out' onClick={()=>signOffClick()}>
