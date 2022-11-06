@@ -95,22 +95,22 @@ const useBookingState = () => {
         setError("dateChecker", {type: "Date", message: "There is an unexpected error..."})
     }
 
-    const initialAmountSet = ({domestic: {travelIn, travelOut, hotelFee}, international}) => {
+    const initialAmountSet = ({domestic: {travelIn, travelOut, hotelFeePerDay, stayFeePerDay}, international}) => {
         const secondsADay =  1000* 60 * 60 * 24
         const numberOfDays = (state.date.Return - state.date.Leave) / secondsADay
 
         if (state.flightType === "domestic") {
             dispatch({
                 type: "INITIAL_AMOUNT_SET",
-                payload: state.withHotel ? (travelIn + travelOut) + (hotelFee*numberOfDays) : (travelIn + travelOut)
+                payload: state.withHotel ? (travelIn + travelOut) + (hotelFeePerDay*numberOfDays) : (travelIn + travelOut) + (stayFeePerDay*numberOfDays)
             })
             return
         }
         if (state.flightType === "international") {
-            const {travelIn, travelOut, hotelFee} = international[state.travellingFromRegion.toLowerCase()]
+            const {travelIn, travelOut, hotelFeePerDay, stayFeePerDay} = international[state.travellingFromRegion.toLowerCase()]
             dispatch({
                 type: "INITIAL_AMOUNT_SET",
-                payload: state.withHotel ? (travelIn + travelOut) + (hotelFee*numberOfDays) : (travelIn + travelOut) 
+                payload: state.withHotel ? (travelIn + travelOut) + (hotelFeePerDay*numberOfDays) : (travelIn + travelOut) + (stayFeePerDay*numberOfDays) 
             })
         }
     }

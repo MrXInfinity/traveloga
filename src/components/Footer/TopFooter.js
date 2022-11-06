@@ -13,7 +13,6 @@ const TopFooter = () => {
   const {register, handleSubmit} = useForm({
     email: ""
   })
-  console.log(form)
   
   const formSubmit = async (formData) => {
     setIsLoading(true)
