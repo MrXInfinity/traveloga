@@ -59,9 +59,12 @@ const Nav = () => {
                     <div className="  flex flex-col justify-around items-center bg-white text-lg w-full " >
                     {[["/", "Home"], ["/offers", "Offers"], ["/destinations", "Destinations"], ["/about-us", "About Us"]].map(([link, title], index) => (
                       <Menu.Item onClick={()=>scrollUp()} key={index}>
-                        <NavLink to={link} className="w-full md:w-fit md:text-white py-4 px-6 border-transparent text-center" style={({ isActive }) => {return {color: isActive ? '#fde68a':''}}}>{title}</NavLink>
+                        <NavLink to={link} className="w-full md:text-white py-4 px-6 border-transparent text-center" style={({ isActive }) => {return {color: isActive ? '#fde68a':''}}}>{title}</NavLink>
                       </Menu.Item>
                     ))}
+                    <Menu.Item onClick={()=>scrollUp()}>
+                      <NavLink to={authenticationToken && user ? "/personal-account" : "/login"} className='  py-2 px-2 lg:px-4 lg:py-3 hover:text-amber-200 text-center text-sm rounded-3xl transition-colors ease-in-out' style={({ isActive }) => {return {color: isActive ? '#fde68a':''}}}>{user && authenticationToken ? `${user.firstname}'s Bookings`: `LOGIN / SIGNUP`}</NavLink>
+                    </Menu.Item>
                     </div>
                   </Menu.Items>
               </Transition>
@@ -73,7 +76,7 @@ const Nav = () => {
         {[["/", "Home"], ["/offers", "Offers"], ["/destinations", "Destinations"], ["/about-us", "About Us"]].map(([link, title], index) => (
           <NavLink to={link} key={index} className="w-fit text-white hover:border-b-4 hover:border-amber-200 text-center transition-all ease-in-out" style={({ isActive }) => {return {color: isActive ? '#fde68a':'', borderBottom: isActive ? `4px solid #fde68a`: ``}}} onClick={()=>scrollUp()}>{title}</NavLink>
         ))}
-          <NavLink to={authenticationToken && user ? "/personal-account" : "/login"} className=' bg-amber-200 hover:bg-amber-300 py-2 px-2 lg:px-4 lg:py-3 hover:text-white text-center text-sm rounded-3xl transition-colors ease-in-out' style={({ isActive }) => {return {color: isActive ? '#fde68a':''}}} onClick={()=>scrollUp()}>{user && authenticationToken ? `${user.firstname}'s Bookings`: `LOGIN / SIGNUP`}</NavLink>
+          <NavLink to={authenticationToken && user ? "/personal-account" : "/login"} className=' bg-amber-200 hover:bg-amber-300 py-2 px-2 lg:px-4 lg:py-3 hover:text-white text-center text-sm rounded-3xl transition-colors ease-in-out ' style={({ isActive }) => {return {backgroundColor: isActive && '#fcd34d', color: isActive && "white"}}} onClick={()=>scrollUp()}>{user && authenticationToken ? `${user.firstname}'s Bookings`: `LOGIN / SIGNUP`}</NavLink>
         </div>
         )}
         
