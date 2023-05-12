@@ -30,7 +30,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "prettier" 
     ]
   },
   "browserslist": {
@@ -47,7 +48,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",
+    "eslint-config-prettier": "^8.8.0",
     "postcss": "^8.4.14",
+    "prettier": "2.8.8",
     "tailwindcss": "^3.0.24"
   }
 }
