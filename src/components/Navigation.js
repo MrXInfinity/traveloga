@@ -6,10 +6,11 @@ import { NavLink, Outlet } from 'react-router-dom';
 import { useGlobalContext } from '../context.js';
 import Footer from './Footer/Footer';
 import TransitionComponent from './TransitionWrapper';
+import useLocalStorage from '../hooks/useLocalStorage.js';
 
 const Nav = () => {
   const { user } = useGlobalContext();
-  const authenticationToken = localStorage.getItem('authenticated');
+  const { localStorageValues } = useLocalStorage('authenticated');
   const navRef = useRef(null);
 
   const navItems = [
@@ -78,7 +79,7 @@ const Nav = () => {
                       <Menu.Item onClick={() => scrollUp()}>
                         <NavLink
                           to={
-                            authenticationToken && user
+                            localStorageValues && user
                               ? '/personal-account'
                               : '/login'
                           }
@@ -86,7 +87,7 @@ const Nav = () => {
                           style={({ isActive }) => {
                             return { color: isActive ? '#fbbf24' : '' };
                           }}>
-                          {user && authenticationToken
+                          {user && localStorageValues
                             ? `${user.firstname}'s Bookings`
                             : `Login / Signup`}
                         </NavLink>
@@ -115,7 +116,7 @@ const Nav = () => {
               </NavLink>
             ))}
             <NavLink
-              to={authenticationToken && user ? '/personal-account' : '/login'}
+              to={localStorageValues && user ? '/personal-account' : '/login'}
               className=" bg-amber-200 hover:bg-amber-300 py-2 px-2 lg:px-4 lg:py-3 hover:text-white text-center text-sm rounded-3xl transition-colors ease-in-out "
               style={({ isActive }) => {
                 return {
@@ -124,7 +125,7 @@ const Nav = () => {
                 };
               }}
               onClick={() => scrollUp()}>
-              {user && authenticationToken
+              {user && localStorageValues
                 ? `${user.firstname}'s Bookings`
                 : `LOGIN / SIGNUP`}
             </NavLink>
