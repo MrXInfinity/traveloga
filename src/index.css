@@ -8,3 +8,9 @@
     font-family: OpenSans, system-ui, sans-serif;
   }
 }
+
+@layer components {
+  .button_transition {
+    @apply transition-colors ease-in-out duration-300;
+  }
+}

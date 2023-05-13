@@ -31,7 +31,7 @@
     "extends": [
       "react-app",
       "react-app/jest",
-      "prettier" 
+      "prettier"
     ]
   },
   "browserslist": {
@@ -50,7 +50,8 @@
     "autoprefixer": "^10.4.7",
     "eslint-config-prettier": "^8.8.0",
     "postcss": "^8.4.14",
-    "prettier": "2.8.8",
+    "prettier": "^2.8.8",
+    "prettier-plugin-tailwindcss": "^0.2.8",
     "tailwindcss": "^3.0.24"
   }
 }
