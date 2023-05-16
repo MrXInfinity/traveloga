@@ -4,34 +4,99 @@ import useLocalStorage from './hooks/useLocalStorage';
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const { localStorageValues } = useLocalStorage('authenticated');
+  const { localStorageValues, setLocalValue } =
+    useLocalStorage('authenticated');
 
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
   const [isFailed, setIsFailed] = useState(false);
-  const [isSignInRequired, setIsSignInRequired] = useState(false);
+
   const [isAccountEditOpen, setIsAccountEditOpen] = useState(false);
+
+  // Booking, Destination, SignIn Modal
+  const [contentModal, setContentModal] = useState({
+    id: '',
+    type: '',
+    isOpen: false,
+  });
+
+  const openBookingUI = (value) => {
+    setContentModal((prev) => ({
+      id: value ?? prev.id,
+      type: 'booking',
+      isOpen: true,
+    }));
+  };
+
+  const openDestinationUI = (value) => {
+    setContentModal({
+      id: value,
+      type: 'destination',
+      isOpen: true,
+    });
+  };
+
+  const openSignInModal = () => {
+    setContentModal({
+      id: '',
+      type: 'signin',
+      isOpen: true,
+    });
+  };
+
+  const closeModal = () => {
+    setContentModal({
+      id: '',
+      type: '',
+      isOpen: false,
+    });
+  };
+
+  console.log(contentModal);
+  // Status for Success/Failed
+  const [statusModal, setStatusModal] = useState({
+    type: '',
+    isOpen: false,
+    message: '',
+  });
+
+  const openLoadingModal = (bool) => {
+    bool
+      ? setStatusModal({ type: 'loading', isOpen: bool })
+      : setStatusModal((prev) => ({ type: 'loading', isOpen: !prev.isOpen }));
+  };
+
+  //Payment Modal
   const [isPaymentOpen, setIsPaymentOpen] = useState({
-    open: false,
+    isOpen: false,
     value: '',
     status: '',
     id: '',
   });
-  const [transitionOpen, setTransitionOpen] = useState(false);
+
+  const setPayment = (status, id, value) => {
+    setIsPaymentOpen({
+      isOpen: true,
+      value: value,
+      status: status,
+      id: id,
+    });
+  };
+
+  const cancelPayment = () => {
+    setIsPaymentOpen({
+      isOpen: false,
+      value: '',
+      status: '',
+      id: '',
+    });
+  };
+
+  //User
   const [user, setUser] = useState(null);
 
-  const [bookingUI, setBookingUI] = useState({
-    id: '',
-    open: false,
-  });
-
-  const [destinationUI, setDestinationUI] = useState({
-    id: '',
-    open: false,
-  });
-
-  const userSignIn = (userInfo, token) => {
-    localStorage.setItem('authenticated', token);
+  const userSignIn = (token) => {
+    setLocalValue(token);
   };
 
   const userSignOut = () => {
@@ -40,16 +105,14 @@ const AppProvider = ({ children }) => {
 
   useEffect(() => {
     const controller = new AbortController();
-
     const fetchUser = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:5000/api/v1/users`,
+          `https://traveloga-api.onrender.com/api/v1/users`,
           { headers: { Authorization: `Bearer ${localStorageValues}` } },
           { signal: controller.signal },
         );
         setUser(data);
-        console.log(data);
       } catch (err) {
         console.log(err);
       }
@@ -60,28 +123,28 @@ const AppProvider = ({ children }) => {
   }, [localStorageValues]);
 
   const value = {
+    setPayment,
+    cancelPayment,
+    openSignInModal,
+    closeModal,
+    openDestinationUI,
+    openBookingUI,
+    contentModal,
+    statusModal,
+    openLoadingModal,
     isLoading,
     setIsLoading,
     user,
     setUser,
     userSignIn,
     userSignOut,
-    bookingUI,
-    setBookingUI,
-    destinationUI,
-    setDestinationUI,
     isSuccessful,
     setIsSuccessful,
     isFailed,
     setIsFailed,
-    isSignInRequired,
-    setIsSignInRequired,
-    transitionOpen,
-    setTransitionOpen,
     isAccountEditOpen,
     setIsAccountEditOpen,
     isPaymentOpen,
-    setIsPaymentOpen,
   };
 
   return <AppContext.Provider {...{ value }}>{children}</AppContext.Provider>;

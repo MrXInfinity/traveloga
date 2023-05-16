@@ -5,11 +5,14 @@ import React, { Fragment, useRef } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useGlobalContext } from '../context.js';
 import Footer from './Footer/Footer.js';
-import TransitionComponent from './TransitionWrapper.js';
+import TransitionWrapper from './TransitionWrapper';
 import useLocalStorage from '../hooks/useLocalStorage.js';
+import BookingUI from './BookingUI/BookingUI';
+import EachDestinationUI from './EachDestinationUI';
+import { PaymentComponent, SignInRequiredComponent } from './PopUpComponents';
 
 const Nav = () => {
-  const { user } = useGlobalContext();
+  const { user, contentModal, isPaymentOpen } = useGlobalContext();
   const { localStorageValues } = useLocalStorage('authenticated');
   const navRef = useRef(null);
 
@@ -23,6 +26,7 @@ const Nav = () => {
   const scrollUp = () => {
     navRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
+  console.log(contentModal, isPaymentOpen);
 
   return (
     <div className="flex flex-col" ref={navRef}>
@@ -136,7 +140,18 @@ const Nav = () => {
       </div>
       <Outlet />
       <Footer />
-      <TransitionComponent />
+      <TransitionWrapper>
+        {contentModal.isOpen && contentModal.type === 'destination' && (
+          <EachDestinationUI />
+        )}
+        {contentModal.isOpen && contentModal.type === 'booking' && (
+          <BookingUI />
+        )}
+        {contentModal.isOpen && contentModal.type === 'signin' && (
+          <SignInRequiredComponent />
+        )}
+        {isPaymentOpen.isOpen && <PaymentComponent />}
+      </TransitionWrapper>
     </div>
   );
 };
