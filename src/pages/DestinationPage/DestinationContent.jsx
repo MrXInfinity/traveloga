@@ -85,7 +85,52 @@ const EachDestinationContent = ({ list, filter }) => {
     list.landmark.length < 1 &&
     list.history.length < 1
   ) {
-    return <div className="flex">No Contents...</div>;
+    return (
+      <div className="flex animate-pulse flex-col gap-4 md:gap-6 lg:gap-8">
+        <div className="flex flex-col items-center gap-2 lg:items-start">
+          <div className="h-4 w-1/4 max-w-[200px] bg-slate-200" />
+          <div className="hidden h-1 w-full bg-slate-200 md:block " />
+        </div>
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:gap-12">
+          <>
+            <div className="flex flex-col gap-2">
+              <div className="group relative flex h-52 bg-slate-200 sm:h-60 md:h-40 lg:h-60 xl:h-80" />
+              <div className="flex flex-col gap-1 px-2">
+                <div className="h-4 w-1/3 bg-slate-200 lg:h-5" />
+                <div className="h-4 w-1/4 bg-slate-200 lg:h-5" />
+              </div>
+            </div>
+          </>
+          <>
+            <div className="flex flex-col gap-2">
+              <div className="group relative flex h-52 bg-slate-200 sm:h-60 md:h-40 lg:h-60 xl:h-80" />
+              <div className="flex flex-col gap-1 px-2">
+                <div className="h-4 w-1/3 bg-slate-200 lg:h-5" />
+                <div className="h-4 w-1/4 bg-slate-200 lg:h-5" />
+              </div>
+            </div>
+          </>
+          <>
+            <div className="flex flex-col gap-2">
+              <div className="group relative flex h-52 bg-slate-200 sm:h-60 md:h-40 lg:h-60 xl:h-80" />
+              <div className="flex flex-col gap-1 px-2">
+                <div className="h-4 w-1/3 bg-slate-200 lg:h-5" />
+                <div className="h-4 w-1/4 bg-slate-200 lg:h-5" />
+              </div>
+            </div>
+          </>
+          <>
+            <div className="flex flex-col gap-2">
+              <div className="group relative flex h-52 bg-slate-200 sm:h-60 md:h-40 lg:h-60 xl:h-80" />
+              <div className="flex flex-col gap-1 px-2">
+                <div className="h-4 w-1/3 bg-slate-200 lg:h-5" />
+                <div className="h-4 w-1/4 bg-slate-200 lg:h-5" />
+              </div>
+            </div>
+          </>
+        </div>
+      </div>
+    );
   }
 
   if (filter) {
@@ -113,7 +158,7 @@ const EachDestinationContent = ({ list, filter }) => {
                 </div>
                 <div className="flex items-start gap-2 px-2">
                   <FontAwesomeIcon
-                    className="mt-1 text-xl text-[#2B8E9B] md:text-2xl"
+                    className="mt-1 text-xl text-[#2B8E9B] lg:text-2xl"
                     icon={faMapPin}
                   />
                   <div className="flex flex-col">
