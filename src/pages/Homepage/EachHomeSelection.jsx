@@ -4,14 +4,7 @@ import React from 'react';
 import { useGlobalContext } from '../../context';
 
 const Selection = ({ info, leftPosition }) => {
-  const { setDestinationUI, setTransitionOpen } = useGlobalContext();
-  const destinationToggleUI = (id) => {
-    setDestinationUI({
-      id: id,
-      open: true,
-    });
-    setTransitionOpen(true);
-  };
+  const { openDestinationUI } = useGlobalContext();
 
   if (info.length < 1) {
     return (
@@ -38,7 +31,7 @@ const Selection = ({ info, leftPosition }) => {
             <div
               className="button_transition flex w-[22rem] flex-col shadow-lg transition-all last:mr-6 hover:shadow-md hover:shadow-black sm:w-[400px] md:w-[522px] md:last:mr-0 "
               key={_id}
-              onClick={() => destinationToggleUI(_id)}>
+              onClick={() => openDestinationUI(_id)}>
               <img
                 src={image}
                 alt={title}

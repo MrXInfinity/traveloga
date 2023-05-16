@@ -29,7 +29,7 @@ const OfferSelection = () => {
         <h1 className="text-center text-lg lg:text-left lg:text-xl">OFFERS</h1>
         <div className="hidden h-[2px] bg-black sm:block " />
       </div>
-      <div className="flex w-full flex-col items-center gap-8 xl:gap-12">
+      <div className="flex w-full flex-col items-center gap-8 lg:gap-12">
         <EachOfferSelection data={info} />
       </div>
     </section>

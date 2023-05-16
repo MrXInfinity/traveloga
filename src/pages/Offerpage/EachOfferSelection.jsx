@@ -3,14 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useGlobalContext } from '../../context';
 
 const EachOfferSelection = ({ data }) => {
-  const { setBookingUI, setTransitionOpen } = useGlobalContext();
-  const bookingToggleUI = (id) => {
-    setBookingUI({
-      id: id,
-      open: true,
-    });
-    setTransitionOpen(true);
-  };
+  const { openBookingUI } = useGlobalContext();
 
   if (data.length < 1) {
     return (
@@ -92,7 +85,7 @@ const EachOfferSelection = ({ data }) => {
               <div
                 className="button_transition flex w-full items-center justify-center bg-amber-300 py-3 px-4 hover:bg-amber-400 hover:text-white sm:w-fit md:py-2"
                 onClick={() => {
-                  bookingToggleUI(_id);
+                  openBookingUI(_id);
                 }}>
                 <p className="">ADD TO CART</p>
               </div>

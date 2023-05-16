@@ -3,7 +3,7 @@ import OfferSelection from './OfferSelection';
 
 const OfferPage = () => {
   return (
-    <div className="flex flex-col justify-center px-8 pt-36 sm:px-16 md:pt-40">
+    <div className="flex justify-center px-8 pt-36 sm:px-16 md:pt-40">
       <div className="flex w-full max-w-7xl flex-col justify-center gap-10 md:gap-12">
         <header
           className="flex h-48 w-full max-w-7xl items-center justify-center bg-cover bg-center bg-no-repeat py-5 md:h-64 lg:h-72 "
