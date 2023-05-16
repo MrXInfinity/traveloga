@@ -6,7 +6,8 @@ const useLocalStorage = (key) => {
       return null;
     }
     try {
-      return window.localStorage.getItem(key);
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : null;
     } catch (error) {
       console.log(error);
       return null;
