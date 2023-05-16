@@ -34,7 +34,7 @@ const EachDestinationUI = () => {
 
   if (!destinationInfo) {
     return (
-      <div className="relative flex w-full max-w-5xl animate-pulse flex-col sm:flex-row">
+      <div className="relative flex w-full animate-pulse flex-col sm:flex-row">
         <div className="relative sm:hidden">
           <FontAwesomeIcon
             className="button_transition absolute right-0 py-2 px-4 text-2xl text-slate-500 hover:text-amber-300"
@@ -93,7 +93,7 @@ const EachDestinationUI = () => {
     destinationInfo;
 
   return (
-    <div className="relative flex w-full max-w-5xl flex-col sm:flex-row">
+    <div className="relative flex w-full flex-col sm:flex-row">
       <div className="relative sm:hidden">
         <FontAwesomeIcon
           className="button_transition absolute right-0 bg-amber-400/70 py-2 px-4 text-2xl hover:text-white"
