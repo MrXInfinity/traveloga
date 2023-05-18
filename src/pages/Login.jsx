@@ -26,7 +26,7 @@ const Login = () => {
   const submit = async (data) => {
     try {
       const { data: token } = await axios.post(
-        'http://localhost:5000/api/v1/auth/login',
+        'https://traveloga-api.onrender.com/api/v1/auth/login',
         data,
         { headers: { 'Content-Type': 'application/json' } },
       );

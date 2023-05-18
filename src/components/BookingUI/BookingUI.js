@@ -61,7 +61,7 @@ const BookingUI = () => {
       const {
         data: { message },
       } = await axios.post(
-        `http://localhost:5000/api/v1/bookings/${id}`,
+        `https://traveloga-api.onrender.com/api/v1/bookings/${id}`,
         data,
         { headers: { Authorization: `Bearer ${authToken}` } },
       );

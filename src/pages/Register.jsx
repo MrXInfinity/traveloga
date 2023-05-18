@@ -63,9 +63,13 @@ const Register = () => {
     try {
       const {
         data: { token, message },
-      } = await axios.post('http://localhost:5000/api/v1/auth/register', data, {
-        headers: { 'Content-Type': 'application/json' },
-      });
+      } = await axios.post(
+        'https://traveloga-api.onrender.com/api/v1/auth/register',
+        data,
+        {
+          headers: { 'Content-Type': 'application/json' },
+        },
+      );
       userSignUp(token);
       openSuccessSnackbar(message);
       navigate('/');
