@@ -5,11 +5,8 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 const Login = () => {
-  const { localStorageValues, setLocalValue } =
-    useLocalStorage('authenticated');
   const [typeIsPassword, setTypeisPassword] = useState(true);
   const {
     register,
@@ -18,7 +15,7 @@ const Login = () => {
     clearErrors,
     formState: { errors },
   } = useForm();
-  const { user } = useGlobalContext();
+  const { user, userSignIn } = useGlobalContext();
   const navigate = useNavigate();
 
   const formInputData = [
@@ -33,7 +30,7 @@ const Login = () => {
         data,
         { headers: { 'Content-Type': 'application/json' } },
       );
-      setLocalValue(token);
+      userSignIn(token);
       navigate('/');
     } catch (err) {
       setError('login', {
@@ -43,7 +40,7 @@ const Login = () => {
     }
   };
 
-  if (user && localStorageValues)
+  if (user)
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center gap-8 ">
         <h1 className="text-2xl font-semibold text-red-600">

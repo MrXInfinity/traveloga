@@ -10,13 +10,15 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 const Register = () => {
   const [typeIsPassword, setTypeisPassword] = useState(true);
-  const { user } = useGlobalContext();
-  const { localStorageValues, setLocalValue } =
-    useLocalStorage('authenticated');
+  const {
+    user,
+    userSignIn: userSignUp,
+    openSuccessSnackbar,
+    openFailedSnackbar,
+  } = useGlobalContext();
   const navigate = useNavigate();
   const {
     register,
@@ -64,15 +66,16 @@ const Register = () => {
       } = await axios.post('http://localhost:5000/api/v1/auth/register', data, {
         headers: { 'Content-Type': 'application/json' },
       });
-      setLocalValue(token);
-      console.log(message);
+      userSignUp(token);
+      openSuccessSnackbar(message);
       navigate('/');
     } catch (err) {
       console.log(err);
+      openFailedSnackbar(err.response.data.msg);
     }
   };
 
-  if (user && localStorageValues)
+  if (user)
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center gap-8 ">
         <h1 className="text-2xl font-semibold text-red-600">

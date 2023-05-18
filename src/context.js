@@ -1,15 +1,18 @@
 import axios from 'axios';
-import React, { useState, useEffect, useContext, createContext } from 'react';
-import useLocalStorage from './hooks/useLocalStorage';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const { localStorageValues, setLocalValue } =
-    useLocalStorage('authenticated');
+  const [authToken, setAuthToken] = useState(
+    localStorage.getItem('authenticated'),
+  );
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccessful, setIsSuccessful] = useState(false);
-  const [isFailed, setIsFailed] = useState(false);
+  useEffect(() => {
+    if (authToken) {
+      window.localStorage.setItem('authenticated', authToken);
+    }
+  }, [authToken]);
 
   const [isAccountEditOpen, setIsAccountEditOpen] = useState(false);
 
@@ -52,7 +55,6 @@ const AppProvider = ({ children }) => {
     });
   };
 
-  console.log(contentModal);
   // Status for Success/Failed
   const [statusModal, setStatusModal] = useState({
     type: '',
@@ -60,10 +62,16 @@ const AppProvider = ({ children }) => {
     message: '',
   });
 
-  const openLoadingModal = (bool) => {
-    bool
-      ? setStatusModal({ type: 'loading', isOpen: bool })
-      : setStatusModal((prev) => ({ type: 'loading', isOpen: !prev.isOpen }));
+  const openSuccessSnackbar = (message) => {
+    setStatusModal({ type: 'success', isOpen: true, message: message });
+  };
+
+  const openFailedSnackbar = (message) => {
+    setStatusModal({ type: 'failed', isOpen: true, message: message });
+  };
+
+  const closeSnackbar = () => {
+    setStatusModal({ type: '', isOpen: false, message: '' });
   };
 
   //Payment Modal
@@ -96,10 +104,11 @@ const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
   const userSignIn = (token) => {
-    setLocalValue(token);
+    setAuthToken(token);
   };
 
   const userSignOut = () => {
+    setAuthToken('');
     localStorage.clear();
   };
 
@@ -109,7 +118,7 @@ const AppProvider = ({ children }) => {
       try {
         const { data } = await axios.get(
           `https://traveloga-api.onrender.com/api/v1/users`,
-          { headers: { Authorization: `Bearer ${localStorageValues}` } },
+          { headers: { Authorization: `Bearer ${authToken}` } },
           { signal: controller.signal },
         );
         setUser(data);
@@ -119,10 +128,16 @@ const AppProvider = ({ children }) => {
     };
 
     fetchUser();
-    return () => controller.abort();
-  }, [localStorageValues]);
+    return () => {
+      setUser(null);
+      controller.abort();
+    };
+  }, [authToken]);
 
   const value = {
+    authToken,
+    userSignIn,
+    userSignOut,
     setPayment,
     cancelPayment,
     openSignInModal,
@@ -131,17 +146,11 @@ const AppProvider = ({ children }) => {
     openBookingUI,
     contentModal,
     statusModal,
-    openLoadingModal,
-    isLoading,
-    setIsLoading,
+    openSuccessSnackbar,
+    openFailedSnackbar,
+    closeSnackbar,
     user,
     setUser,
-    userSignIn,
-    userSignOut,
-    isSuccessful,
-    setIsSuccessful,
-    isFailed,
-    setIsFailed,
     isAccountEditOpen,
     setIsAccountEditOpen,
     isPaymentOpen,

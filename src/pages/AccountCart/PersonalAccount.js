@@ -1,38 +1,42 @@
-import React, {useState, useEffect, useRef} from 'react'
-import AccountUIComponent from './AccountUIComponent'
-import BookingsList from './BookingsList'
-import BookingNavigation from './BookingNavigation'
-import { useGlobalContext } from '../../context'
-import TransitionComponent from '../../components/TransitionWrapper'
-import { useNavigate } from 'react-router-dom'
+import React, { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useGlobalContext } from '../../context';
+import AccountUIComponent from './AccountUIComponent';
+import BookingNavigation from './BookingNavigation';
+import BookingsList from './BookingsList';
 
 const PersonalAccount = () => {
-  const {user, setIsSignInRequired, setTransitionOpen} = useGlobalContext()
-  const authenticationToken = localStorage.getItem("authenticated")
-  const [bookingFilter, setBookingFilter] = useState("")
-  const navigate = useNavigate()
-  const accountCartRef = useRef(null)
+  const { user } = useGlobalContext();
+  const [bookingFilter, setBookingFilter] = useState('');
+  const accountCartRef = useRef(null);
 
-  useEffect(() => {
-    if (!user || !authenticationToken) {
-      setIsSignInRequired(true)
-      setTransitionOpen(true)
-      navigate("/")
-    }
-  }, [user, authenticationToken])
+  if (!user)
+    return (
+      <div className="flex h-screen w-screen flex-col items-center justify-center gap-8 ">
+        <h1 className="text-2xl font-semibold text-red-600">
+          YOu need to log in to access this page
+        </h1>
+        <Link
+          to="/login"
+          className="transition-color rounded-md bg-amber-200 px-4 py-3 text-white duration-200 ease-in-out hover:bg-amber-300">
+          Login
+        </Link>
+      </div>
+    );
 
   return (
-  <>
-    <div className="flex">
-        <BookingNavigation {...{bookingFilter, setBookingFilter, accountCartRef}} />
-        <div className="flex flex-col w-full">
-          <AccountUIComponent {...{accountCartRef}}/>
-          <BookingsList {...{bookingFilter }} />
+    <>
+      <div className="flex">
+        <BookingNavigation
+          {...{ bookingFilter, setBookingFilter, accountCartRef }}
+        />
+        <div className="flex w-full flex-col">
+          <AccountUIComponent {...{ accountCartRef }} />
+          <BookingsList {...{ bookingFilter }} />
         </div>
       </div>
-      <TransitionComponent />
     </>
-  )
-}
+  );
+};
 
-export default PersonalAccount
+export default PersonalAccount;

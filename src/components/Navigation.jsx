@@ -4,16 +4,15 @@ import { Menu, Transition } from '@headlessui/react';
 import React, { Fragment, useRef } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useGlobalContext } from '../context.js';
-import Footer from './Footer/Footer.js';
+import Footer from './Footer.jsx';
 import TransitionWrapper from './TransitionWrapper';
-import useLocalStorage from '../hooks/useLocalStorage.js';
 import BookingUI from './BookingUI/BookingUI';
 import EachDestinationUI from './EachDestinationUI';
 import { PaymentComponent, SignInRequiredComponent } from './PopUpComponents';
 
 const Nav = () => {
   const { user, contentModal, isPaymentOpen } = useGlobalContext();
-  const { localStorageValues } = useLocalStorage('authenticated');
+
   const navRef = useRef(null);
 
   const navItems = [
@@ -26,7 +25,6 @@ const Nav = () => {
   const scrollUp = () => {
     navRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-  console.log(contentModal, isPaymentOpen);
 
   return (
     <div className="flex flex-col" ref={navRef}>
@@ -84,16 +82,12 @@ const Nav = () => {
                         ))}
                         <Menu.Item onClick={() => scrollUp()}>
                           <NavLink
-                            to={
-                              localStorageValues && user
-                                ? '/personal-account'
-                                : '/login'
-                            }
+                            to={user ? '/personal-account' : '/login'}
                             className=" py-4 px-6 hover:text-amber-400"
                             style={({ isActive }) => {
                               return { color: isActive ? '#fbbf24' : '' };
                             }}>
-                            {user && localStorageValues
+                            {user
                               ? `${user.firstname}'s Bookings`
                               : `Login / Signup`}
                           </NavLink>
@@ -123,7 +117,7 @@ const Nav = () => {
                 </NavLink>
               ))}
               <NavLink
-                to={localStorageValues && user ? '/personal-account' : '/login'}
+                to={user ? '/personal-account' : '/login'}
                 className=" button_transition rounded-3xl  bg-amber-300 py-2 px-4 text-center text-sm hover:bg-amber-300 hover:text-white lg:px-4 lg:py-3 "
                 style={({ isActive }) => {
                   return {
@@ -132,7 +126,7 @@ const Nav = () => {
                   };
                 }}
                 onClick={() => scrollUp()}>
-                {user && localStorageValues ? `My Bookings` : `Login / Signup`}
+                {user ? `My Bookings` : `Login / Signup`}
               </NavLink>
             </div>
           </div>
