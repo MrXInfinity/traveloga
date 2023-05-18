@@ -1,5 +1,3 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
-
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
@@ -11,20 +9,30 @@ module.exports = {
       screens: {
         xl: '1440px',
       },
-      /*keyframes: {
-        openModal: {
-          "0%": {opacity: 0, transform: scaleY(0.5)},
-          "100%": {opacity: 1, transform: scaleY(1)}
+      keyframes: {
+        scrollXS: {
+          '100%': { transform: 'translateX(-98%)' },
         },
-        closeModal: {
-          "0%": {opacity: 1, transform: scaleY(1)},
-          "100%": {opacity: 0, transform: scaleY(0.5)}
-        }
+        scrollSM: {
+          '100%': { transform: 'translateX(-90%)' },
+        },
+        scrollMD: {
+          '100%': { transform: 'translateX(-80%)' },
+        },
+        scrollLG: {
+          '100%': { transform: 'translateX(-70%)' },
+        },
+        scrollXL: {
+          '100%': { transform: 'translateX(-60%)' },
+        },
       },
       animation: {
-        "openingModal": "",
-        "closingModal": ""
-      }*/
+        scrollInfiniteXS: 'scrollXS 20s linear infinite',
+        scrollInfiniteSM: 'scrollSM 20s linear infinite',
+        scrollInfiniteMD: 'scrollMD 20s linear infinite',
+        scrollInfiniteLG: 'scrollLG 20s linear infinite',
+        scrollInfiniteXL: 'scrollXL 20s linear infinite',
+      },
     },
   },
   plugins: [],
