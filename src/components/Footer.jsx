@@ -5,7 +5,11 @@ import {
   faPinterestP,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
-import { faCompass, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCompass,
+  faPaperPlane,
+  faSpinner,
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useState } from 'react';
@@ -24,7 +28,11 @@ const Footer = () => {
 const TopFooter = () => {
   const { openSuccessSnackbar, openFailedSnackbar } = useGlobalContext();
   const [isLoading, setIsLoading] = useState(false);
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     email: '',
   });
 
@@ -53,37 +61,55 @@ const TopFooter = () => {
   };
 
   return (
-    <section className="bg-[#34abbb] py-6 text-white md:py-12 xl:py-16 ">
-      <div className="sm:3/4 mx-auto flex w-4/5 flex-col text-center lg:w-3/4">
-        <p className="md:text-lg lg:text-xl ">
-          TRAVEL. As much as you can. As far as you can. As long as you can.{' '}
-          <br className="hidden lg:block" />
-          Life's not meant to be lived in one place.
-        </p>
-        <h1 className="mt-2 md:text-lg lg:mt-4 lg:text-xl">Martin Moodie</h1>
-        <p className="mt-4  text-xs lg:mt-6">
-          Subscribe now to be aware of our future promos and possible changes to
-          our services
-        </p>
-        <form
-          className="mt-4 flex w-full items-center justify-between bg-white px-2 py-1 text-black md:mx-auto md:px-6 md:py-2 lg:w-3/4"
-          onSubmit={handleSubmit(formSubmit)}>
-          <input
-            className="w-3/4 bg-transparent py-0 text-sm md:py-0 md:text-base lg:mr-4 lg:w-4/5"
-            type="email"
-            {...register('email')}
-          />
-          <button
-            type="submit"
-            disbled={isLoading}
-            className="flex items-center bg-amber-200 py-2 px-4 transition-colors duration-300 ease-in-out hover:bg-amber-300 hover:text-white md:py-1 md:px-6">
-            <h1 className="hidden sm:block">SUBMIT</h1>
-            <FontAwesomeIcon
-              className="text-lg sm:hidden"
-              icon={faPaperPlane}
+    <section className="flex justify-center text-white  ">
+      <div className="flex w-full max-w-[100rem] flex-col gap-4 bg-[#34abbb] p-6 text-center sm:px-16 md:flex-row md:py-12 md:text-left lg:gap-8 xl:gap-12">
+        <div className="flex flex-col gap-2 md:w-2/5 md:flex-auto">
+          <p className="italic lg:text-lg">
+            TRAVEL. As much as you can. As far as you can. As long as you can.{' '}
+            Life's not meant to be lived in one place.
+          </p>
+          <h1 className=" lg:text-lg">Martin Moodie</h1>
+        </div>
+
+        <div className="flex flex-col gap-4 md:w-3/5 md:flex-auto">
+          <p className=" text-sm opacity-90">
+            Subscribe to be updated at our latest promos, new destinatinos and
+            other changes to our services
+          </p>
+          <form
+            className="flex w-full  items-center gap-4 bg-white py-2 px-3 text-black "
+            onSubmit={handleSubmit(formSubmit)}>
+            <input
+              className={`${
+                errors.email ? 'placeholder:text-red-700' : ''
+              } flex-auto bg-transparent py-2 text-sm outline-none md:text-base`}
+              type="email"
+              placeholder={
+                errors.email ? errors.email.message : 'JohnDoe@domain.com'
+              }
+              {...register('email', {
+                required: 'Please provide your email',
+              })}
             />
-          </button>
-        </form>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="button_transition enabled:hover:bg-amber-400 enabled:hover:text-white flex items-center gap-4 bg-amber-300 py-2 px-4 md:py-2 md:px-6">
+              <h1 className="hidden sm:block">SUBMIT</h1>
+              {isLoading ? (
+                <FontAwesomeIcon
+                  icon={faSpinner}
+                  className="text-lg motion-safe:animate-spin sm:hidden lg:block"
+                />
+              ) : (
+                <FontAwesomeIcon
+                  className="text-lg sm:hidden lg:block"
+                  icon={faPaperPlane}
+                />
+              )}
+            </button>
+          </form>
+        </div>
       </div>
     </section>
   );
@@ -91,7 +117,11 @@ const TopFooter = () => {
 
 const BottomFooter = () => {
   const { openSuccessSnackbar, openFailedSnackbar } = useGlobalContext();
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     name: '',
     subject: '',
     email: '',
@@ -116,74 +146,144 @@ const BottomFooter = () => {
   };
 
   return (
-    <section className="mx-auto flex w-full flex-col items-center bg-[#2B8E9B] py-8 md:flex-row-reverse md:items-start lg:px-14 lg:py-8">
-      <form
-        className="lg:md-0 flex w-4/5 flex-col md:w-full md:pl-4 lg:w-2/3 xl:pl-8"
-        onSubmit={handleSubmit(formSubmit)}>
-        <div className="mb-4 grid h-full grid-flow-col grid-rows-4 gap-4 lg:grid-rows-3 ">
-          {[
-            ['text', 'Name', 'name'],
-            ['email', 'Email', 'email'],
-            ['text', 'Subject', 'subject'],
-            ['paragraph', 'Message', 'message'],
-          ].map(([type, placeholder, inputName], index) => (
-            <input
-              className="border-2 border-white bg-transparent p-4 transition duration-300 ease-in-out placeholder:italic placeholder:text-slate-400 hover:border-amber-200 last:lg:row-span-3"
-              {...register(inputName)}
-              type={type}
-              placeholder={placeholder}
-              key={index}
-            />
-          ))}
-        </div>
-        <button
-          className="translation-all text-amber-200 duration-300 ease-in-out hover:text-amber-300 md:text-right"
-          type="submit"
-          disabled={isLoading}>
-          Submit
-        </button>
-      </form>
-      <div className="mt-6 flex w-4/5 flex-col items-center md:mt-0 md:items-start lg:w-1/3">
-        <div className="flex lg:items-center">
-          <FontAwesomeIcon
-            className="mt-1 mr-2 text-2xl text-white md:text-3xl"
-            icon={faCompass}
-          />
-          <div className="w-40 flex-col text-white md:w-fit">
-            <h1 className="-mb-1">TRAVELOGA</h1>
-            <h1 className="text-xs">
-              Experience Philippines, Love Philippines
+    <section className="flex justify-center">
+      <div className="flex w-full max-w-[100rem] flex-col items-stretch gap-4 bg-[#2B8E9B] py-8 px-6 sm:px-16 md:flex-row-reverse md:items-start md:gap-8 lg:gap-12 lg:py-8">
+        <form
+          className="flex flex-auto flex-col gap-4 text-white md:flex-row"
+          onSubmit={handleSubmit(formSubmit)}>
+          <div className="flex flex-auto flex-col gap-4 md:w-2/5">
+            <div className="flex flex-col gap-2">
+              <label className="font-Rubik">Name</label>
+              <input
+                required
+                className={` ${
+                  errors.name
+                    ? `placeholder:text-red-700/50`
+                    : `placeholder:text-slate-300`
+                } button_transition border-2 border-white bg-transparent py-2 px-3 placeholder:italic  hover:border-amber-200`}
+                {...register('name', {
+                  required: 'Please provide your name.',
+                })}
+                type="text"
+                placeholder={errors.name ? errors.name.message : 'John Doe'}
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="font-Rubik">Email</label>
+              <input
+                required
+                className={` ${
+                  errors.email
+                    ? `placeholder:text-red-700/50`
+                    : `placeholder:text-slate-300`
+                } button_transition border-2 border-white bg-transparent py-2 px-3 placeholder:italic  hover:border-amber-200`}
+                {...register('email', {
+                  required: 'Please provide your email',
+                })}
+                type="email"
+                placeholder={
+                  errors.email ? errors.email.message : 'johndoe@website.com'
+                }
+              />
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="font-Rubik">Subject</label>
+              <input
+                className={` ${
+                  errors.subject
+                    ? `placeholder:text-red-700/50`
+                    : `placeholder:text-slate-300`
+                } button_transition border-2 border-white bg-transparent py-2 px-3 placeholder:italic  hover:border-amber-200`}
+                {...register('subject')}
+                type="text"
+                placeholder={
+                  errors.subject
+                    ? errors.subject.message
+                    : 'Destination Inquiry'
+                }
+              />
+            </div>
+          </div>
+          <div className="flex flex-auto flex-col gap-4 md:w-3/5 lg:flex-row">
+            <div className="flex flex-col gap-2 md:flex-auto">
+              <label className="font-Rubik">Message</label>
+              <textarea
+                required
+                className={` ${
+                  errors.message
+                    ? `placeholder:text-red-700/50`
+                    : `placeholder:text-slate-300`
+                } button_transition h-32 border-2 border-white bg-transparent py-2 px-3 placeholder:italic hover:border-amber-200  md:flex-auto`}
+                {...register('message', {
+                  required: 'Please provide your message',
+                })}
+                placeholder={
+                  errors.message
+                    ? errors.message.message
+                    : 'I would like to book for...'
+                }
+              />
+            </div>
+
+            <button
+              className="translation-all button_transition font-semibold text-amber-300 hover:text-amber-400 md:text-right lg:self-end"
+              type="submit"
+              disabled={isLoading}>
+              SUBMIT
+            </button>
+          </div>
+        </form>
+        <div className=" flex flex-col items-stretch gap-4 md:items-start">
+          <div className="flex flex-col text-center text-sm text-[#004852] md:text-left lg:text-base">
+            <h1>500 Terry Francois Street</h1>
+            <h1>San Francisco, CA 94158</h1>
+            <h1>info@mysite.com</h1>
+            <h1>Tel: 123-456-7890</h1>
+            <h1>Fax: 123-456-7890</h1>
+            <h1>
+              TRAVELOGA 2022. <br /> designed & created by Johann Isaiah Mendoza
             </h1>
           </div>
-        </div>
-        <div className="mt-6 flex flex-col text-center md:mt-3 md:text-left">
-          {[
-            '500 Terry Francois Street',
-            'San Francisco, CA 94158',
-            'info@mysite.com',
-            'Tel: 123-456-7890',
-            'Fax: 123-456-7890',
-            'Copymark: TRAVELOGA 2022. by: Johann Isaiah Mendoza',
-          ].map((text, index) => (
-            <h1 className="text-sm text-[#004852] lg:text-base" key={index}>
-              {text}
-            </h1>
-          ))}
-        </div>
-        <div className="mx-auto mt-6 flex text-3xl text-white md:mx-0 lg:mt-3">
-          {[
-            [faPinterestP, 'https://www.pinterest.ph/'],
-            [faInstagram, 'https://www.instagram.com/'],
-            [faTwitter, 'https://twitter.com/'],
-            [faFacebookF, 'https://www.facebook.com/'],
-          ].map(([icon, link], index) => (
-            <a
-              className="ml-4 transition duration-300 ease-in-out first:ml-0 hover:text-amber-200"
-              href={link}
-              key={index}>
-              <FontAwesomeIcon icon={icon} />
-            </a>
-          ))}
+          <div className="flex items-center justify-between md:flex-col md:gap-2">
+            <div className="flex items-center gap-2 ">
+              <FontAwesomeIcon
+                className="text-xl text-white "
+                icon={faCompass}
+              />
+              <div className="flex flex-col ">
+                <h1 className="font-Rubik text-sm  text-white lg:text-base">
+                  TRAVELOGA
+                </h1>
+                <h1 className="whitespace-nowrap text-xs text-white ">
+                  Experiencing Philippines
+                </h1>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4  text-2xl text-white">
+              <a
+                className="button_transition hover:text-amber-300"
+                href="https://www.pinterest.ph/">
+                <FontAwesomeIcon icon={faPinterestP} />
+              </a>
+              <a
+                className="button_transition hover:text-amber-300"
+                href="https://www.instagram.com/">
+                <FontAwesomeIcon icon={faInstagram} />
+              </a>
+              <a
+                className="button_transition hover:text-amber-300"
+                href="https://twitter.com/">
+                <FontAwesomeIcon icon={faTwitter} />
+              </a>
+              <a
+                className="button_transition hover:text-amber-300"
+                href="https://www.facebook.com/">
+                <FontAwesomeIcon icon={faFacebookF} />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>

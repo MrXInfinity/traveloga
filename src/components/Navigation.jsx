@@ -105,11 +105,11 @@ const Nav = () => {
                 <NavLink
                   to={link}
                   key={index}
-                  className="button_transition w-fit text-center text-white transition-all hover:border-b-4 hover:border-amber-300"
+                  className="button_transition w-fit text-center text-white transition-all hover:border-b-[3px] hover:border-amber-300"
                   style={({ isActive }) => {
                     return {
                       color: isActive ? '#fde68a' : '',
-                      borderBottom: isActive ? `4px solid #fde68a` : ``,
+                      borderBottom: isActive ? `3px solid #fde68a` : ``,
                     };
                   }}
                   onClick={() => scrollUp()}>
