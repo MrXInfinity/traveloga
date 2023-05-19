@@ -16,6 +16,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const { user, userSignIn } = useGlobalContext();
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const formInputData = [
@@ -24,17 +25,19 @@ const Login = () => {
   ];
 
   const submit = async (data) => {
-    console.log('submitting');
+    setIsLoading(true);
     try {
       const { data: token } = await axios.post(
         'https://traveloga-api.onrender.com/api/v1/auth/login',
         data,
         { headers: { 'Content-Type': 'application/json' } },
       );
+      setIsLoading(false);
       userSignIn(token);
       navigate('/');
     } catch (err) {
       console.log(err);
+      setIsLoading(false);
       setError('email', {
         type: 'login',
         message: 'Your email and/or password is wrong',
@@ -139,12 +142,15 @@ const Login = () => {
                   </div>
                   <div className="flex gap-4 lg:gap-12">
                     <Link
+                      disabled={isLoading}
                       className="button_transition flex flex-1 justify-center bg-[#2B8E9B]/30 py-4 hover:bg-[#2B8E9B]/50 md:p-4"
                       to="/">
                       RETURN HOME
                     </Link>
-                    <button className="button_transition flex flex-1 justify-center bg-amber-300 py-4 text-center hover:bg-amber-400 md:p-4">
-                      LOG IN
+                    <button
+                      disabled={isLoading}
+                      className="button_transition enabled:hover:bg-amber-400 flex flex-1 justify-center bg-amber-300 py-4 text-center disabled:bg-amber-200 md:p-4">
+                      {isLoading ? 'LOGGING IN...' : 'LOG IN'}
                     </button>
                   </div>
                 </form>

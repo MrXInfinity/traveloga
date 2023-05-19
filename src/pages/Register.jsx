@@ -10,11 +10,14 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGlobalContext } from '../context';
+import { StatusSnackBar } from '../components/PopUpComponents';
 
 const Register = () => {
   const [typeIsPassword, setTypeisPassword] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const {
     user,
+    statusSnackbar: { isOpen },
     userSignIn: userSignUp,
     openSuccessSnackbar,
     openFailedSnackbar,
@@ -60,6 +63,7 @@ const Register = () => {
   ];
 
   const submit = async (data) => {
+    setIsLoading(true);
     try {
       const {
         data: { token, message },
@@ -70,11 +74,13 @@ const Register = () => {
           headers: { 'Content-Type': 'application/json' },
         },
       );
+      setIsLoading(false);
       userSignUp(token);
       openSuccessSnackbar(message);
       navigate('/');
     } catch (err) {
       console.log(err);
+      setIsLoading(false);
       openFailedSnackbar(err.response.data.msg);
     }
   };
@@ -95,7 +101,7 @@ const Register = () => {
 
   return (
     <>
-      <div className="flex justify-center text-white">
+      <div className="relative flex justify-center text-white">
         <div
           className="flex h-[93vh] w-full max-w-[100rem] bg-cover bg-center bg-no-repeat  md:h-screen"
           style={{ backgroundImage: `url("/images/login-register-pic.avif")` }}>
@@ -185,14 +191,17 @@ const Register = () => {
                     to="/">
                     RETURN HOME
                   </Link>
-                  <button className="button_transition flex flex-1 justify-center bg-amber-300 py-4 text-center hover:bg-amber-400 md:p-4">
-                    CREATE ACCOUNT
+                  <button
+                    disabled={isLoading}
+                    className="button_transition enabled:hover:bg-amber-400 flex flex-1 justify-center bg-amber-300 py-4 text-center disabled:bg-amber-200 md:p-4">
+                    {isLoading ? 'CREATING' : 'CREATE ACCOUNT'}
                   </button>
                 </div>
               </form>
             </div>
           </div>
         </div>
+        {isOpen && <StatusSnackBar />}
       </div>
     </>
   );
