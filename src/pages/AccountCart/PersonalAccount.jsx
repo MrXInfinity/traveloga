@@ -1,20 +1,18 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../../context';
-import AccountUIComponent from './AccountUIComponent';
-import BookingNavigation from './BookingNavigation';
+import AccountNavigation from './AccountNavigation';
 import BookingsList from './BookingsList';
 
 const PersonalAccount = () => {
   const { user } = useGlobalContext();
   const [bookingFilter, setBookingFilter] = useState('');
-  const accountCartRef = useRef(null);
 
   if (!user)
     return (
       <div className="flex h-screen w-screen flex-col items-center justify-center gap-8 ">
         <h1 className="text-2xl font-semibold text-red-600">
-          YOu need to log in to access this page
+          You need to log in to access this page
         </h1>
         <Link
           to="/login"
@@ -26,12 +24,9 @@ const PersonalAccount = () => {
 
   return (
     <>
-      <div className="flex">
-        <BookingNavigation
-          {...{ bookingFilter, setBookingFilter, accountCartRef }}
-        />
-        <div className="flex w-full flex-col">
-          <AccountUIComponent {...{ accountCartRef }} />
+      <div className="flex justify-center pt-[6.5rem]">
+        <div className="flex w-full max-w-[100rem] flex-col">
+          <AccountNavigation {...{ bookingFilter, setBookingFilter }} />
           <BookingsList {...{ bookingFilter }} />
         </div>
       </div>
