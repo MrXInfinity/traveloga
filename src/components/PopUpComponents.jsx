@@ -24,7 +24,7 @@ const StatusSnackBar = () => {
   }, [isOpen]);
 
   return (
-    <div className="absolute bottom-0 left-0 flex w-fit items-center gap-4 bg-white py-3 px-4 text-black">
+    <div className="fixed bottom-0 left-0 flex w-fit items-center gap-4 bg-white py-3 px-4 text-black">
       <div
         className={`flex items-center gap-2 ${
           type === 'success' ? 'text-green-600' : ''

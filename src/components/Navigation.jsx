@@ -8,10 +8,15 @@ import Footer from './Footer.jsx';
 import TransitionWrapper from './TransitionWrapper';
 import BookingUI from './BookingUI/BookingUI';
 import EachDestinationUI from './EachDestinationUI';
-import { PaymentComponent, SignInRequiredComponent } from './PopUpComponents';
+import {
+  PaymentComponent,
+  SignInRequiredComponent,
+  StatusSnackBar,
+} from './PopUpComponents';
 
 const Nav = () => {
-  const { user, contentModal, isPaymentOpen } = useGlobalContext();
+  const { user, contentModal, isPaymentOpen, statusSnackbar } =
+    useGlobalContext();
 
   const navRef = useRef(null);
 
@@ -27,7 +32,7 @@ const Nav = () => {
   };
 
   return (
-    <div className="flex flex-col" ref={navRef}>
+    <div className="relative flex flex-col" ref={navRef}>
       <div className="flex justify-center">
         <div className="fixed top-0 z-10 flex w-full max-w-[100rem] items-center justify-between bg-black/40 px-5 pt-5 pb-6 lg:px-12 lg:py-6">
           <div className="flex items-center gap-2 text-white">
@@ -144,6 +149,7 @@ const Nav = () => {
         )}
         {isPaymentOpen.isOpen && <PaymentComponent />}
       </TransitionWrapper>
+      {statusSnackbar.isOpen && <StatusSnackBar />}
     </div>
   );
 };

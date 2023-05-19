@@ -94,7 +94,7 @@ const TopFooter = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="button_transition enabled:hover:bg-amber-400 enabled:hover:text-white flex items-center gap-4 bg-amber-300 py-2 px-4 md:py-2 md:px-6">
+              className="button_transition enabled:hover:bg-amber-400 enabled:hover:text-white flex items-center gap-4 bg-amber-300 py-2 px-4 disabled:bg-amber-200 md:py-2 md:px-6">
               <h1 className="hidden sm:block">SUBMIT</h1>
               {isLoading ? (
                 <FontAwesomeIcon
@@ -227,7 +227,7 @@ const BottomFooter = () => {
             </div>
 
             <button
-              className="translation-all button_transition font-semibold text-amber-300 hover:text-amber-400 md:text-right lg:self-end"
+              className="translation-all button_transition enabled:hover:text-amber-400 font-semibold text-amber-300 disabled:text-amber-200 md:text-right lg:self-end"
               type="submit"
               disabled={isLoading}>
               SUBMIT
