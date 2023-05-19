@@ -11,6 +11,8 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     if (authToken) {
       window.localStorage.setItem('authenticated', authToken);
+    } else {
+      localStorage.removeItem('authenticated');
     }
   }, [authToken]);
 
@@ -109,7 +111,7 @@ const AppProvider = ({ children }) => {
 
   const userSignOut = () => {
     setAuthToken('');
-    localStorage.clear();
+    localStorage.removeItem('authenticated');
   };
 
   useEffect(() => {
@@ -124,10 +126,13 @@ const AppProvider = ({ children }) => {
         setUser(data);
       } catch (err) {
         console.log(err);
+        setAuthToken('');
       }
     };
 
-    fetchUser();
+    if (authToken) {
+      fetchUser();
+    }
     return () => {
       setUser(null);
       controller.abort();
