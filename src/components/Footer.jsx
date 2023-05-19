@@ -18,10 +18,10 @@ import { useGlobalContext } from '../context.js';
 
 const Footer = () => {
   return (
-    <>
+    <div className="flex flex-col">
       <TopFooter />
       <BottomFooter />
-    </>
+    </div>
   );
 };
 

@@ -135,8 +135,11 @@ const Nav = () => {
           </div>
         </div>
       </div>
-      <Outlet />
-      <Footer />
+      <div className="flex flex-col gap-32">
+        <Outlet />
+        <Footer />
+      </div>
+
       <TransitionWrapper>
         {contentModal.isOpen && contentModal.type === 'destination' && (
           <EachDestinationUI />
