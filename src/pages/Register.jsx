@@ -95,96 +95,102 @@ const Register = () => {
 
   return (
     <>
-      <div
-        className="flex h-[93vh] w-full bg-cover bg-center bg-no-repeat text-white md:h-screen"
-        style={{ backgroundImage: `url("/images/login-register-pic.avif")` }}>
-        <div className="flex w-full flex-col bg-gradient-to-r from-black/80 via-black/70 to-black/30 py-8 px-6 md:via-black/70 md:to-black/10 lg:from-black/70 lg:via-black/70 lg:to-transparent lg:py-6 lg:px-8">
-          <div className="flex md:items-center">
-            <FontAwesomeIcon
-              className="mt-2 mr-4 text-2xl text-white md:mt-0 lg:mr-2"
-              icon={faCompass}
-            />
-            <div className=" w-40 flex-col md:w-fit">
-              <h1 className=" -mb-1 text-xl text-white">TRAVELOGA</h1>
-              <h1 className=" text-xs text-white ">
-                Experience Philippines, Love Philippines
-              </h1>
-            </div>
-          </div>
-          <div className="mx-4 mt-10 flex h-full max-w-xl flex-col md:ml-8 md:mt-12 lg:ml-12 lg:w-7/12 lg:max-w-2xl">
-            <h1 className='mb-2 font-["Rubik"] text-xl md:mb-3 md:text-2xl'>
-              CREATING A NEW ACCOUNT
-            </h1>
-            <p className="mb-6 text-sm md:mb-8 md:text-base">
-              Already have an account?{' '}
-              <span>
-                <Link
-                  to="/login"
-                  className="inline h-fit border-amber-200 text-amber-200 transition-all duration-300 ease-in-out hover:border-b-2">
-                  LOG IN
-                </Link>
-              </span>
-            </p>
-            <form
-              className="flex h-full max-w-xl flex-col gap-4 md:grid md:max-w-2xl md:grid-flow-row md:grid-cols-2"
-              onSubmit={handleSubmit(submit)}>
-              {formInputData.map(
-                ({ title, inputName, icon, type, maxLength }, index) => (
-                  <div
-                    className={`col-span-2 flex flex-col first:col-span-1 ${
-                      inputName === 'lastname' && `col-span-1`
-                    }`}
-                    key={index}>
-                    <div className="flex items-center justify-between">
-                      <label className="md:text-lg">{title}</label>
-                      {errors[inputName] && (
-                        <p className="text-right text-sm text-red-600">
-                          {errors[inputName].message}
-                        </p>
-                      )}
-                    </div>
-                    <div className="col-span-2 mt-2 flex items-center rounded-lg bg-white px-4 py-2 lg:mt-3">
-                      <input
-                        className="w-full bg-transparent py-1 text-black md:py-0 md:text-lg lg:text-base"
-                        type={
-                          !type ? (typeIsPassword ? 'password' : 'text') : type
-                        }
-                        {...register(inputName, {
-                          required: `This field is required.`,
-                          minLength: {
-                            value: 2,
-                            message: 'Add more characters.',
-                          },
-                          maxLength: {
-                            value: maxLength | 15,
-                            message: 'Too much characters.',
-                          },
-                        })}
-                      />
-                      <FontAwesomeIcon
-                        className={`ml-4 text-2xl ${
-                          icon === faEye ? `text-amber-200` : `text-black`
-                        }`}
-                        icon={icon}
-                        onClick={() =>
-                          !type && setTypeisPassword((prev) => !prev)
-                        }
-                      />
-                    </div>
-                  </div>
-                ),
-              )}
-              <div className="mt-4 grid grid-cols-2 gap-4 md:col-span-2 md:mb-4 md:self-end lg:gap-12">
-                <Link
-                  className="flex items-center justify-center bg-[#2B8E9B]/30 py-4 px-2 text-center transition-all ease-in-out hover:bg-[#2B8E9B]/50 md:p-4"
-                  to="/">
-                  RETURN HOME
-                </Link>
-                <button className="flex items-center justify-center bg-amber-200 py-4 px-2 transition-all ease-in-out hover:bg-amber-300 md:p-4">
-                  CREATE ACCOUNT
-                </button>
+      <div className="flex justify-center text-white">
+        <div
+          className="flex h-[93vh] w-full max-w-[100rem] bg-cover bg-center bg-no-repeat  md:h-screen"
+          style={{ backgroundImage: `url("/images/login-register-pic.avif")` }}>
+          <div className="flex w-full flex-col gap-12 bg-gradient-to-r from-black/80 via-black/70 to-black/30 py-8 px-6 md:via-black/70 md:to-black/10 lg:from-black/70 lg:via-black/70 lg:to-transparent lg:py-6 lg:px-8">
+            <div className="flex items-center gap-2 ">
+              <FontAwesomeIcon
+                className="mt-2 text-3xl  md:mt-0 "
+                icon={faCompass}
+              />
+              <div className="flex flex-col ">
+                <h1 className="font-Rubik text-lg lg:text-xl">TRAVELOGA</h1>
+                <h1 className="whitespace-nowrap text-xs">
+                  Experiencing Philippines
+                </h1>
               </div>
-            </form>
+            </div>
+
+            <div className="flex max-w-xl flex-auto flex-col justify-between gap-8 sm:px-8 md:w-3/4 md:max-w-2xl  md:px-8">
+              <div className="flex flex-col gap-2 md:gap-4">
+                <h1 className="font-Rubik text-xl font-medium md:text-2xl lg:text-3xl xl:text-4xl">
+                  CREATING A NEW ACCOUNT
+                </h1>
+                <div className="text-sm md:text-base">
+                  Already have an account?{' '}
+                  <Link
+                    to="/login"
+                    className="button_transition inline h-fit border-amber-300 text-amber-300 transition-all hover:border-b-[3px]">
+                    LOG IN
+                  </Link>
+                </div>
+              </div>
+              <form
+                className="flex h-full max-w-xl flex-col gap-16"
+                onSubmit={handleSubmit(submit)}>
+                <div className="flex flex-col gap-4">
+                  {formInputData.map(
+                    ({ title, inputName, icon, type, maxLength }, index) => (
+                      <div className="flex flex-col gap-2" key={index}>
+                        <div className="flex items-center justify-between">
+                          <label className="md:text-lg">{title}</label>
+                          {errors[inputName] && (
+                            <p className="text-right text-sm text-red-600">
+                              {errors[inputName].message}
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex items-center gap-4 bg-white px-3 py-2">
+                          <input
+                            className="w-full bg-transparent py-1 text-black outline-none md:py-0 md:text-lg lg:text-base"
+                            type={
+                              !type
+                                ? typeIsPassword
+                                  ? 'password'
+                                  : 'text'
+                                : type
+                            }
+                            {...register(inputName, {
+                              required: `This field is required.`,
+                              minLength: {
+                                value: 2,
+                                message: 'Add more characters.',
+                              },
+                              maxLength: {
+                                value: maxLength | 15,
+                                message: 'Too much characters.',
+                              },
+                            })}
+                          />
+                          <FontAwesomeIcon
+                            className={`text-xl ${
+                              icon === faEye ? `text-amber-200` : `text-black`
+                            }`}
+                            icon={icon}
+                            onClick={() =>
+                              !type && setTypeisPassword((prev) => !prev)
+                            }
+                          />
+                        </div>
+                      </div>
+                    ),
+                  )}
+                </div>
+
+                <div className="flex gap-4 lg:gap-12">
+                  <Link
+                    className="button_transition flex flex-1 justify-center bg-[#2B8E9B]/30 py-4 hover:bg-[#2B8E9B]/50 md:p-4"
+                    to="/">
+                    RETURN HOME
+                  </Link>
+                  <button className="button_transition flex flex-1 justify-center bg-amber-300 py-4 text-center hover:bg-amber-400 md:p-4">
+                    CREATE ACCOUNT
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>

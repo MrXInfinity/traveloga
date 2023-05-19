@@ -30,16 +30,14 @@ const Nav = () => {
     <div className="flex flex-col" ref={navRef}>
       <div className="flex justify-center">
         <div className="fixed top-0 z-10 flex w-full max-w-[100rem] items-center justify-between bg-black/40 px-5 pt-5 pb-6 lg:px-12 lg:py-6">
-          <div className="flex items-center gap-2 ">
+          <div className="flex items-center gap-2 text-white">
             <FontAwesomeIcon
-              className="mt-2 text-3xl text-white md:mt-0 "
+              className="mt-2 text-3xl  md:mt-0 "
               icon={faCompass}
             />
             <div className="flex flex-col ">
-              <h1 className="font-Rubik text-lg text-white lg:text-xl">
-                TRAVELOGA
-              </h1>
-              <h1 className="whitespace-nowrap text-xs text-white ">
+              <h1 className="font-Rubik text-lg  lg:text-xl">TRAVELOGA</h1>
+              <h1 className="whitespace-nowrap text-xs  ">
                 Experiencing Philippines
               </h1>
             </div>
