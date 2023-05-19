@@ -56,22 +56,22 @@ const AppProvider = ({ children }) => {
   };
 
   // Status for Success/Failed
-  const [statusModal, setStatusModal] = useState({
+  const [statusSnackbar, setStatusSnackbar] = useState({
     type: '',
     isOpen: false,
     message: '',
   });
 
   const openSuccessSnackbar = (message) => {
-    setStatusModal({ type: 'success', isOpen: true, message: message });
+    setStatusSnackbar({ type: 'success', isOpen: true, message: message });
   };
 
   const openFailedSnackbar = (message) => {
-    setStatusModal({ type: 'failed', isOpen: true, message: message });
+    setStatusSnackbar({ type: 'failed', isOpen: true, message: message });
   };
 
   const closeSnackbar = () => {
-    setStatusModal({ type: '', isOpen: false, message: '' });
+    setStatusSnackbar({ type: '', isOpen: false, message: '' });
   };
 
   //Payment Modal
@@ -145,7 +145,7 @@ const AppProvider = ({ children }) => {
     openDestinationUI,
     openBookingUI,
     contentModal,
-    statusModal,
+    statusSnackbar,
     openSuccessSnackbar,
     openFailedSnackbar,
     closeSnackbar,
