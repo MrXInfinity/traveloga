@@ -2,32 +2,54 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner, faCashRegister } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleCheck,
+  faCircleXmark,
+  faCashRegister,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
 import { useGlobalContext } from '../context.js';
 
-const LoadingComponent = () => {
-  return (
-    <div className="flex w-fit items-center bg-white py-6 px-8">
-      <FontAwesomeIcon
-        className="mr-4 text-3xl motion-safe:animate-spin"
-        icon={faSpinner}
-      />
-      <h1 className="text-xl">Loading</h1>
-    </div>
-  );
-};
-
-const ResultComponent = ({ setIsOpen, title, icon }) => {
+const StatusSnackBar = () => {
+  const {
+    statusSnackbar: { type, isOpen, message },
+    closeSnackbar,
+  } = useGlobalContext();
   useEffect(() => {
-    setTimeout(() => {
-      setIsOpen(false);
-    }, 2000);
-  }, []);
+    if (isOpen) {
+      setTimeout(() => {
+        closeSnackbar();
+      }, 2000);
+    }
+  }, [isOpen]);
 
   return (
-    <div className="flex w-fit items-center bg-white py-6 px-8">
-      <FontAwesomeIcon className=" mr-4 text-4xl lg:text-3xl" icon={icon} />
-      <h1 className="text-2xl lg:text-xl">{title}</h1>
+    <div className="absolute bottom-0 left-0 flex w-fit items-center gap-4 bg-white py-3 px-4 text-black">
+      <div
+        className={`flex items-center gap-2 ${
+          type === 'success' ? 'text-green-600' : ''
+        } ${type === 'failed' ? 'text-red-600' : ''}`}>
+        {type === 'success' && (
+          <FontAwesomeIcon
+            className="text-lg lg:text-xl"
+            icon={faCircleCheck}
+          />
+        )}
+        {type === 'failed' && (
+          <FontAwesomeIcon
+            className="text-lg lg:text-xl"
+            icon={faCircleXmark}
+          />
+        )}
+        <h1 className="uppercase">{type}</h1>
+      </div>
+
+      <p className="text-sm text-black md:text-base">{message}</p>
+      <FontAwesomeIcon
+        className="button_transition text-lg text-black hover:text-amber-300 lg:text-xl"
+        icon={faXmark}
+        onClick={() => closeSnackbar()}
+      />
     </div>
   );
 };
@@ -93,9 +115,4 @@ const PaymentComponent = () => {
   );
 };
 
-export {
-  SignInRequiredComponent,
-  ResultComponent,
-  LoadingComponent,
-  PaymentComponent,
-};
+export { SignInRequiredComponent, StatusSnackBar, PaymentComponent };
