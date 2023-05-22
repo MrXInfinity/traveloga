@@ -22,18 +22,17 @@ const PersonalAccount = () => {
     setListOfBookings(data);
   };
 
-  console.log(listOfBookings);
   if (!user)
     return (
-      <div className="flex h-screen w-screen flex-col items-center justify-center gap-8 ">
-        <h1 className="text-2xl font-semibold text-red-600">
-          You need to log in to access this page
-        </h1>
-        <Link
-          to="/login"
-          className="button_transition rounded-md bg-amber-200 px-4 py-3 text-white hover:bg-amber-300">
-          Login
-        </Link>
+      <div className="flex h-screen w-screen flex-col items-center justify-center gap-8 px-16 ">
+        <div className="flex w-full max-w-7xl flex-col items-center justify-center gap-8">
+          <h1 className="text-center font-Rubik text-lg font-semibold text-red-600 lg:text-xl">
+            You need to log in to access this page
+          </h1>
+          <button className="button_transition rounded-md bg-amber-300 px-6 py-3 font-semibold text-white hover:bg-amber-400">
+            <Link to="/login">LOGIN</Link>
+          </button>
+        </div>
       </div>
     );
 

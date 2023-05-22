@@ -87,15 +87,15 @@ const Register = () => {
 
   if (user)
     return (
-      <div className="flex h-screen w-screen flex-col items-center justify-center gap-8 ">
-        <h1 className="text-2xl font-semibold text-red-600">
-          This Page is Unaccessible
-        </h1>
-        <Link
-          to="/"
-          className="transition-color rounded-md bg-amber-200 px-4 py-3 text-white duration-200 ease-in-out hover:bg-amber-300">
-          Return to HomePage
-        </Link>
+      <div className="flex h-screen w-screen flex-col items-center justify-center gap-8 px-16 ">
+        <div className="flex w-full max-w-7xl flex-col items-center justify-center gap-8">
+          <h1 className="text-center font-Rubik text-lg font-semibold text-red-600 lg:text-xl">
+            This Page is Restriced
+          </h1>
+          <button className="button_transition rounded-md bg-amber-300 px-6 py-3 font-semibold text-white hover:bg-amber-400">
+            <Link to="/">Return to HomePage</Link>
+          </button>
+        </div>
       </div>
     );
 
@@ -105,7 +105,7 @@ const Register = () => {
         <div
           className="flex h-[93vh] w-full max-w-[100rem] bg-cover bg-center bg-no-repeat  md:h-screen"
           style={{ backgroundImage: `url("/images/login-register-pic.avif")` }}>
-          <div className="flex w-full flex-col gap-12 bg-gradient-to-r from-black/80 via-black/70 to-black/30 py-8 px-6 md:via-black/70 md:to-black/10 lg:from-black/70 lg:via-black/70 lg:to-transparent lg:py-6 lg:px-8">
+          <div className="flex w-full flex-col gap-12 bg-gradient-to-r from-black/80 via-black/70 to-black/30 px-6 py-8 md:via-black/70 md:to-black/10 lg:from-black/70 lg:via-black/70 lg:to-transparent lg:px-8 lg:py-6">
             <div className="flex items-center gap-2 ">
               <FontAwesomeIcon
                 className="mt-2 text-3xl  md:mt-0 "
@@ -193,7 +193,7 @@ const Register = () => {
                   </Link>
                   <button
                     disabled={isLoading}
-                    className="button_transition enabled:hover:bg-amber-400 flex flex-1 justify-center bg-amber-300 py-4 text-center disabled:bg-amber-200 md:p-4">
+                    className="button_transition flex flex-1 justify-center bg-amber-300 py-4 text-center enabled:hover:bg-amber-400 disabled:bg-amber-200 md:p-4">
                     {isLoading ? 'CREATING' : 'CREATE ACCOUNT'}
                   </button>
                 </div>
