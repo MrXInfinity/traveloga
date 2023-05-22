@@ -4,19 +4,18 @@ import { Menu, Transition } from '@headlessui/react';
 import React, { Fragment, useRef } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { useGlobalContext } from '../context.js';
-import Footer from './Footer.jsx';
-import TransitionWrapper from './TransitionWrapper';
 import BookingUI from './BookingUI/BookingUI';
 import EachDestinationUI from './EachDestinationUI';
-import {
-  PaymentComponent,
-  SignInRequiredComponent,
-  StatusSnackBar,
-} from './PopUpComponents';
+import Footer from './Footer.jsx';
+import { SignInRequiredComponent, StatusSnackBar } from './PopUpComponents';
+import TransitionWrapper from './TransitionWrapper';
 
 const Nav = () => {
-  const { user, contentModal, isPaymentOpen, statusSnackbar } =
-    useGlobalContext();
+  const {
+    user,
+    contentModal: { isOpen: isContentOpen, type: contentType },
+    statusSnackbar,
+  } = useGlobalContext();
 
   const navRef = useRef(null);
 
@@ -34,7 +33,7 @@ const Nav = () => {
   return (
     <div className="relative flex flex-col" ref={navRef}>
       <div className="flex justify-center">
-        <div className="fixed top-0 z-10 flex w-full max-w-[100rem] items-center justify-between bg-black/40 px-5 pt-5 pb-6 lg:px-12 lg:py-6">
+        <div className="fixed top-0 z-10 flex w-full max-w-[100rem] items-center justify-between bg-black/40 px-5 pb-6 pt-5 lg:px-12 lg:py-6">
           <div className="flex items-center gap-2 text-white">
             <FontAwesomeIcon
               className="mt-2 text-3xl  md:mt-0 "
@@ -75,7 +74,7 @@ const Nav = () => {
                           <Menu.Item onClick={() => scrollUp()} key={index}>
                             <NavLink
                               to={link}
-                              className="w-full border-transparent py-4 px-6 md:text-white"
+                              className="w-full border-transparent px-6 py-4 md:text-white"
                               style={({ isActive }) => {
                                 return { color: isActive ? '#fbbf24' : '' };
                               }}>
@@ -86,7 +85,7 @@ const Nav = () => {
                         <Menu.Item onClick={() => scrollUp()}>
                           <NavLink
                             to={user ? '/personal-account' : '/login'}
-                            className=" py-4 px-6 hover:text-amber-400"
+                            className=" px-6 py-4 hover:text-amber-400"
                             style={({ isActive }) => {
                               return { color: isActive ? '#fbbf24' : '' };
                             }}>
@@ -121,7 +120,7 @@ const Nav = () => {
               ))}
               <NavLink
                 to={user ? '/personal-account' : '/login'}
-                className=" button_transition rounded-3xl  bg-amber-300 py-2 px-4 text-center text-sm hover:bg-amber-300 hover:text-white lg:px-4 lg:py-3 "
+                className=" button_transition rounded-3xl  bg-amber-300 px-4 py-2 text-center text-sm hover:bg-amber-300 hover:text-white lg:px-4 lg:py-3 "
                 style={({ isActive }) => {
                   return {
                     backgroundColor: isActive && '#fcd34d',
@@ -140,17 +139,14 @@ const Nav = () => {
         <Footer />
       </div>
 
-      <TransitionWrapper>
-        {contentModal.isOpen && contentModal.type === 'destination' && (
+      <TransitionWrapper isOpen={isContentOpen}>
+        {isContentOpen && contentType === 'destination' && (
           <EachDestinationUI />
         )}
-        {contentModal.isOpen && contentModal.type === 'booking' && (
-          <BookingUI />
-        )}
-        {contentModal.isOpen && contentModal.type === 'signin' && (
+        {isContentOpen && contentType === 'booking' && <BookingUI />}
+        {isContentOpen && contentType === 'signin' && (
           <SignInRequiredComponent />
         )}
-        {isPaymentOpen.isOpen && <PaymentComponent />}
       </TransitionWrapper>
       {statusSnackbar.isOpen && <StatusSnackBar />}
     </div>

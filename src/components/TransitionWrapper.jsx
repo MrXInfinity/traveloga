@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import React, { Fragment } from 'react';
 import { useGlobalContext } from '../context.js';
 
-const TransitionWrapper = ({ children }) => {
+const TransitionWrapper = ({ children, isOpen }) => {
   const { isPaymentOpen, cancelPayment, contentModal, closeModal } =
     useGlobalContext();
 
@@ -12,9 +12,7 @@ const TransitionWrapper = ({ children }) => {
   };
 
   return (
-    <Transition
-      show={contentModal.isOpen || isPaymentOpen.isOpen}
-      as={Fragment}>
+    <Transition show={isOpen} as={Fragment}>
       <Dialog onClose={() => transitionClose()}>
         <Transition.Child
           as={Fragment}

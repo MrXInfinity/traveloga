@@ -1,13 +1,11 @@
-import axios from 'axios';
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleCheck,
   faCircleXmark,
-  faCashRegister,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context.js';
 
 const StatusSnackBar = () => {
@@ -15,6 +13,7 @@ const StatusSnackBar = () => {
     statusSnackbar: { type, isOpen, message },
     closeSnackbar,
   } = useGlobalContext();
+
   useEffect(() => {
     if (isOpen) {
       setTimeout(() => {
@@ -24,7 +23,7 @@ const StatusSnackBar = () => {
   }, [isOpen]);
 
   return (
-    <div className="fixed bottom-0 left-0 flex w-fit items-center gap-4 bg-white py-3 px-4 text-black">
+    <div className="fixed bottom-0 left-0 flex w-fit items-center gap-4 bg-white px-4 py-3 text-black">
       <div
         className={`flex items-center gap-2 ${
           type === 'success' ? 'text-green-600' : ''
@@ -58,7 +57,7 @@ const SignInRequiredComponent = () => {
   const { closeModal } = useGlobalContext();
 
   return (
-    <div className="grid w-3/4 grid-flow-row grid-cols-1 items-center gap-4 bg-white py-4 px-6 lg:w-fit lg:grid-cols-2 lg:py-6 lg:px-8">
+    <div className="grid w-3/4 grid-flow-row grid-cols-1 items-center gap-4 bg-white px-6 py-4 lg:w-fit lg:grid-cols-2 lg:px-8 lg:py-6">
       <h1 className="text-center text-xl lg:col-span-2">
         An Account is required to do the following task/s.
       </h1>
@@ -77,42 +76,4 @@ const SignInRequiredComponent = () => {
   );
 };
 
-const PaymentComponent = () => {
-  const { authToken, isPaymentOpen, cancelPayment } = useGlobalContext();
-
-  //   const changeStatus = async (status, id) => {
-  //     try {
-  //       const { data } = await axios.patch(
-  //         `https://traveloga-api.onrender.com/api/v1/bookings/${id}`,
-  //         { status: status },
-  //         { headers: { Authorization: `Bearer ${localStorageValues}` } },
-  //       );
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-
-  return (
-    <div className="flex w-3/4 flex-col items-center bg-white py-4 px-6 lg:w-fit lg:py-6 lg:px-8">
-      <FontAwesomeIcon className="mb-4 text-4xl" icon={faCashRegister} />
-      <h1 className='font-["Rubik"] text-xl'>Payment Confirmation</h1>
-      <h2>Amount: {isPaymentOpen.value}</h2>
-      <div className="mt-4 grid w-full grid-flow-row grid-cols-2 gap-2">
-        <button
-          className="bg-amber-200 py-2 transition-colors ease-in-out hover:bg-amber-300 hover:text-white"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            cancelPayment();
-          }}>
-          Cancel
-        </button>
-        <button className="bg-amber-200 py-2 transition-colors ease-in-out hover:bg-amber-300 hover:text-white">
-          Pay
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export { SignInRequiredComponent, StatusSnackBar, PaymentComponent };
+export { SignInRequiredComponent, StatusSnackBar };

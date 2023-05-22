@@ -80,15 +80,13 @@ const AppProvider = ({ children }) => {
   const [isPaymentOpen, setIsPaymentOpen] = useState({
     isOpen: false,
     value: '',
-    status: '',
     id: '',
   });
 
-  const setPayment = (status, id, value) => {
+  const setPayment = (id, value) => {
     setIsPaymentOpen({
       isOpen: true,
       value: value,
-      status: status,
       id: id,
     });
   };

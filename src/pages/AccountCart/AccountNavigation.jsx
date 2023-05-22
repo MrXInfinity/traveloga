@@ -13,7 +13,7 @@ import { Menu, Transition } from '@headlessui/react';
 import React from 'react';
 import { useGlobalContext } from '../../context';
 
-const AccountNavigation = ({ bookingFilter, setBookingFilter }) => {
+const AccountNavigation = ({ bookingFilter, setFilter }) => {
   const { user, userSignOut } = useGlobalContext();
 
   const navList = [
@@ -25,7 +25,7 @@ const AccountNavigation = ({ bookingFilter, setBookingFilter }) => {
   ];
 
   return (
-    <div className="flex justify-center bg-[#423F3F] py-4 px-6 sm:px-16">
+    <div className="flex justify-center bg-[#423F3F] px-6 py-4 sm:px-16">
       <div className="flex h-fit w-full items-center justify-between gap-3 text-center text-sm text-white md:text-base">
         <div className="flex flex-col items-start sm:items-center md:flex-row md:gap-4">
           <h1 className="whitespace-nowrap">
@@ -35,7 +35,7 @@ const AccountNavigation = ({ bookingFilter, setBookingFilter }) => {
         </div>
         <div className="flex items-center gap-4 sm:w-full sm:flex-row-reverse">
           <button
-            className="button_transition flex items-center justify-center gap-2 py-2 px-3 text-amber-300 hover:text-amber-400 sm:flex-col sm:rounded-lg sm:bg-amber-300 sm:text-white sm:hover:bg-amber-400 sm:hover:text-white md:p-2 md:px-4"
+            className="button_transition flex items-center justify-center gap-2 px-3 py-2 text-amber-300 hover:text-amber-400 sm:flex-col sm:rounded-lg sm:bg-amber-300 sm:text-white sm:hover:bg-amber-400 sm:hover:text-white md:p-2 md:px-4"
             onClick={() => userSignOut()}>
             <FontAwesomeIcon className="text-lg lg:text-xl" icon={faPowerOff} />
             <h1 className="hidden md:block">Log Out</h1>
@@ -62,13 +62,13 @@ const AccountNavigation = ({ bookingFilter, setBookingFilter }) => {
                 {navList.map(([icon, title], index) => (
                   <Menu.Item
                     onClick={() => {
-                      setBookingFilter(title);
-                    }}>
+                      setFilter(title);
+                    }}
+                    key={index}>
                     <div
                       className={`button_transition flex w-full cursor-pointer items-center justify-between gap-3 p-4 hover:text-amber-300 ${
                         title === bookingFilter ? `text-amber-300` : ``
-                      }`}
-                      key={index}>
+                      }`}>
                       <p className="text-sm md:block md:text-base">
                         {title === '' ? `All` : title}
                       </p>
@@ -89,7 +89,7 @@ const AccountNavigation = ({ bookingFilter, setBookingFilter }) => {
                   title === bookingFilter ? `text-amber-300` : ``
                 }`}
                 onClick={() => {
-                  setBookingFilter(title);
+                  setFilter(title);
                 }}
                 key={index}>
                 <FontAwesomeIcon className="text-xl " icon={icon} />
