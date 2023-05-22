@@ -15,7 +15,7 @@ const AboutUsComponent = () => {
           />
           <div className="flex h-fit max-w-sm flex-col items-center justify-around gap-6 place-self-center bg-black/[0.80] p-8 text-white sm:gap-4 sm:p-12 md:w-full md:max-w-lg md:items-start md:justify-start md:gap-6 md:place-self-start md:bg-transparent md:p-0 lg:gap-4">
             <div className="flex flex-col gap-2">
-              <h1 className='text-center font-["Rubik"] text-lg md:text-left lg:text-xl'>
+              <h1 className="text-center font-Rubik text-lg font-semibold md:text-left lg:text-xl">
                 ABOUT US
               </h1>
               <h1 className="text-center text-2xl md:text-left lg:text-3xl">

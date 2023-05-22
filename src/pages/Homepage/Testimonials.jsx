@@ -35,7 +35,7 @@ const Testimonials = () => {
         <div className="flex h-[650px] items-center gap-8 md:h-[120px] md:w-full md:items-start md:justify-center md:bg-black/[0.80] md:px-6 md:pt-8 lg:h-[150px] lg:gap-12 lg:px-12 lg:pt-12 ">
           <div className="flex h-fit max-w-sm flex-col gap-6 bg-black/[0.80] p-8 text-white sm:p-12 md:w-full md:max-w-lg md:justify-start md:bg-transparent md:p-0">
             <div className="flex flex-col gap-2">
-              <h1 className='text-center font-["Rubik"] text-lg md:text-left lg:text-xl'>
+              <h1 className="text-center font-Rubik text-lg md:text-left lg:text-xl">
                 TESTIMONIALS
               </h1>
               <h2 className="text-center text-2xl md:mb-2 md:text-left lg:mb-4 lg:text-3xl">

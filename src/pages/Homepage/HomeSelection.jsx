@@ -32,7 +32,7 @@ const HomeSelection = ({ showCase }) => {
               <div className="flex flex-col">
                 <h1 className="hidden md:block md:text-lg ">Where to go:</h1>
               </div>
-              <h1 className=" font-['Rubik'] text-lg uppercase md:text-xl ">{`${showCase} Destinations:`}</h1>
+              <h1 className=" font-Rubik text-lg font-semibold uppercase md:text-xl ">{`${showCase} Destinations:`}</h1>
             </div>
 
             <div className="flex items-end">
