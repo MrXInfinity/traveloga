@@ -53,7 +53,7 @@ const BookingsList = ({ listOfBookings, alterBookingList, bookingFilter }) => {
         <div
           className="flex w-full flex-col gap-2 p-4 odd:bg-black/10 md:odd:bg-white md:even:bg-black/10"
           key={index1}>
-          <h1 className="ont-Rubik text-lg font-semibold lg:text-xl">
+          <h1 className="font-Rubik text-lg font-semibold lg:text-xl">
             {title.toUpperCase()}
           </h1>
           <div className="grid grid-flow-row grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">

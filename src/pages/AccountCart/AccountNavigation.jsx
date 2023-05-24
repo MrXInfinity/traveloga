@@ -12,9 +12,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Menu, Transition } from '@headlessui/react';
 import React from 'react';
 import { useGlobalContext } from '../../context';
+import { useNavigate } from 'react-router-dom';
 
 const AccountNavigation = ({ bookingFilter, setFilter }) => {
   const { user, userSignOut } = useGlobalContext();
+  const navigate = useNavigate();
+
+  const signOut = () => {
+    userSignOut();
+    navigate('/');
+  };
 
   const navList = [
     [faList, ''],
@@ -36,7 +43,7 @@ const AccountNavigation = ({ bookingFilter, setFilter }) => {
         <div className="flex items-center gap-4 sm:w-full sm:flex-row-reverse">
           <button
             className="button_transition flex items-center justify-center gap-2 px-3 py-2 text-amber-300 hover:text-amber-400 sm:flex-col sm:rounded-lg sm:bg-amber-300 sm:text-white sm:hover:bg-amber-400 sm:hover:text-white md:p-2 md:px-4"
-            onClick={() => userSignOut()}>
+            onClick={() => signOut()}>
             <FontAwesomeIcon className="text-lg lg:text-xl" icon={faPowerOff} />
             <h1 className="hidden md:block">Log Out</h1>
           </button>
