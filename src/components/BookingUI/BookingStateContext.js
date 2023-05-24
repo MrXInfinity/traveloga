@@ -1,181 +1,362 @@
-import {useReducer, useCallback} from 'react'
-import { initialState, bookingReducer } from './BookingReducer'
-import { useForm } from 'react-hook-form'
+import {
+  useReducer,
+  useCallback,
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+} from 'react';
+import { initialState, bookingReducer } from './BookingReducer';
+import { useGlobalContext } from '../../context.js';
+import moment from 'moment';
+import axios from 'axios';
 
-const useBookingState = () => {
-    const [state, dispatch] = useReducer(bookingReducer, initialState)
-    const form = useForm({
-        defaultValues: {
-            travellingFromLocation: "",
-            regionsCategory: "",
-            travellingFromRegion: "",
-            travellingTo: "",
-            dateOfLeave: "",
-            dateOfReturn: "",
-            withHotel: false,
-            flightType: "",
-            amount: ""
-        }
-    })
+const BookingContext = createContext();
 
-    const {setValue, setError, clearErrors} = form
+export const BookingProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(bookingReducer, initialState);
+  const {
+    contentModal: { isOpen, id },
+    openSuccessSnackbar,
+    openFailedSnackbar,
+    openSignInModal,
+    closeModal,
+    authToken,
+  } = useGlobalContext();
 
-    const flightTypeClick = (flightType) => {
+  // Booking Information for the form
+  const [bookingInfo, setBookingInfo] = useState({
+    title: '',
+    limitedOffers: {},
+    domestic: {},
+    international: {},
+  });
+
+  const [errors, setErrors] = useState({
+    flightTypeRegion: '',
+    location: '',
+    date: '',
+  });
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const fetchEachDestinationInfo = async () => {
+      try {
+        const { data } = await axios.get(
+          `https://traveloga-api.onrender.com/api/v1/destinations/${id}`,
+          { signal: controller.signal },
+        );
+        setBookingInfo(data.destination);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    if (id && isOpen) {
+      fetchEachDestinationInfo();
+    }
+    return () => {
+      controller.abort();
+    };
+  }, [id, isOpen]);
+
+  const flightTypeSelect = (val) => {
+    if (errors.flightTypeRegion) {
+      setErrors((prev) => ({
+        ...prev,
+        flightTypeRegion: '',
+      }));
+    }
+    dispatch({
+      type: 'CHANGE_FLIGHTTYPE',
+      payload: val,
+    });
+  };
+
+  const regionSelect = (prov, region) => {
+    if (!state.flightType) {
+      setErrors((prev) => ({
+        ...prev,
+        flightTypeRegion: 'Flight type field is required...',
+      }));
+      return;
+    }
+    if (errors.flightTypeRegion) {
+      setErrors((prev) => ({
+        ...prev,
+        flightTypeRegion: '',
+      }));
+    }
+    dispatch({
+      type: 'SET_REGION',
+      payload: {
+        prov,
+        region,
+      },
+    });
+  };
+
+  const locationSelect = (val) => {
+    if (!state.flightType || !state.regionsCategory) {
+      setErrors((prev) => ({
+        ...prev,
+        flightTypeRegion: 'Flight type & Region fields are required...',
+      }));
+      return;
+    }
+
+    if (errors.location) {
+      setErrors((prev) => ({
+        ...prev,
+        location: '',
+      }));
+    }
+    dispatch({
+      type: 'SET_LOCATION',
+      payload: val,
+    });
+  };
+
+  const hotelToggle = () => {
+    dispatch({ type: 'HOTEL_TOGGLE' });
+  };
+
+  const dateSelection = (label, value) => {
+    if (errors.date) {
+      setErrors((prev) => ({
+        ...prev,
+        date: '',
+      }));
+    }
+
+    if (label === 'Leave') {
+      if (moment(value).isBefore(moment().add(1, 'month'))) {
+        setErrors((prev) => ({
+          ...prev,
+          date: "Pick a date of leave that's more than a month of today.",
+        }));
+        return;
+      }
+
+      dispatch({
+        type: 'DATE_CLICK',
+        payload: {
+          label,
+          value: moment(value).toISOString(),
+        },
+      });
+      return;
+    }
+
+    if (!state.date.Leave) {
+      setErrors((prev) => ({
+        ...prev,
+        date: 'Please select first the date of your leave.',
+      }));
+      return;
+    }
+    if (moment(value).isBefore(moment(state.date.Leave))) {
+      setErrors((prev) => ({
+        ...prev,
+        date: 'Your return date should not precede your leave date.',
+      }));
+      return;
+    }
+
+    dispatch({
+      type: 'DATE_CLICK',
+      payload: {
+        label,
+        value: moment(value).toISOString(),
+      },
+    });
+    return;
+  };
+
+  const initialAmountSet = useCallback(
+    ({
+      domestic: { travelIn, travelOut, hotelFeePerDay, stayFeePerDay },
+      international,
+    }) => {
+      const numOfDays = moment(state.date.Return).diff(
+        moment(state.date.Leave),
+        'days',
+      );
+
+      if (state.flightType === 'domestic') {
         dispatch({
-            type: "CHANGE_FLIGHTTYPE",
-            payload: flightType
-        })
-        clearErrors(["flightType", "regionsCategory"])
-        setValue("regionsCategory", "")
-        setValue("travellingFromLocation", "")
-        setValue("travellingFromRegion", "")
-    }
-
-    const regionsCategoryClick = (region) => {
+          type: 'INITIAL_AMOUNT_SET',
+          payload: state.withHotel
+            ? travelIn + travelOut + hotelFeePerDay * numOfDays
+            : travelIn + travelOut + stayFeePerDay * numOfDays,
+        });
+        return;
+      }
+      if (state.flightType === 'international') {
+        const { travelIn, travelOut, hotelFeePerDay, stayFeePerDay } =
+          international[state.travellingFromRegion.toLowerCase()];
         dispatch({
-            type: "SET_LOCATIONFILTER",
-            payload: region
-        })
-        clearErrors("regionsCategory")
-        setValue("travellingFromLocation", "")
-        setValue("travellingFromRegion", "")
-    }
+          type: 'INITIAL_AMOUNT_SET',
+          payload: state.withHotel
+            ? travelIn + travelOut + hotelFeePerDay * numOfDays
+            : travelIn + travelOut + stayFeePerDay * numOfDays,
+        });
+      }
+    },
+    [
+      state.date.Leave,
+      state.date.Return,
+      state.flightType,
+      state.travellingFromRegion,
+      state.withHotel,
+    ],
+  );
 
-    const eachRegionClick = (eachRegion, location) => {
-        setValue("travellingFromRegion", eachRegion)
-        if (eachRegion && location) {
-            dispatch({
-            type: "SET_EACHREGION",
-            payload: {
-                eachRegion,
-                location
-            }
-        })
-        return
-        }
-        dispatch({type: "REMOVE_EACHREGION"})
-    }
-
-    const withHotelClick = () => {
-        dispatch({type: "HOTEL_TOGGLE"})
-        setValue("withHotel", !state.withHotel)
-    }
-    const setDateClick = (label, value) => {
-        const localValue = new Date(value)
-        if (label === "Leave") {
-            if (Math.floor((localValue.getTime()) / 100000) > Math.floor(((Date.now()) + 604800000) / 100000)) {
-                setValue("dateOfReturn","")
-                clearErrors(["dateOfLeave", "dateOfReturn", "dateOfLeave_selectcorrectdate", "date_selectnewdate"])
-                dispatch({
-                    type: "LEAVE_BUTTON_CLICK", 
-                    payload: localValue.getTime()
-                })
-                return
-            } 
-            setError("dateOfLeave_selectcorrectdate", {type: "Date", message: "Pick a date of leave that's more than a week of the current day."})
-            dispatch({type: "LEAVE_BUTTON_CLICK", payload: ""})
-            return
-        }
-        if (label === "Return") {
-            if (!state.date.Leave) {
-                setError("date_selectnewdate", {type: "Date", message: "Select first the date of your leave."})
-                return
-            }
-            if (Math.floor((localValue.getTime()) / 100000) > Math.floor((Date.now() + 691200000) / 100000) && localValue > state.date.Leave) {
-                clearErrors(["dateOfLeave", "dateOfReturn", "dateOfReturn_selectcorrectdate", "date_selectnewdate"])
-                dispatch({
-                    type: "RETURN_BUTTON_CLICK",
-                    payload: localValue.getTime()
-                })
-                return
-            }
-            setError("dateOfReturn_selectcorrectdate", {type: "Date", message: "Pick a date of return that's more than a week of the current day and greater than the date of leave."}) 
-            return
-        }
-        setError("dateChecker", {type: "Date", message: "There is an unexpected error..."})
-    }
-
-    const initialAmountSet = ({domestic: {travelIn, travelOut, hotelFeePerDay, stayFeePerDay}, international}) => {
-        const secondsADay =  1000* 60 * 60 * 24
-        const numberOfDays = (state.date.Return - state.date.Leave) / secondsADay
-
-        if (state.flightType === "domestic") {
-            dispatch({
-                type: "INITIAL_AMOUNT_SET",
-                payload: state.withHotel ? (travelIn + travelOut) + (hotelFeePerDay*numberOfDays) : (travelIn + travelOut) + (stayFeePerDay*numberOfDays)
-            })
-            return
-        }
-        if (state.flightType === "international") {
-            const {travelIn, travelOut, hotelFeePerDay, stayFeePerDay} = international[state.travellingFromRegion.toLowerCase()]
-            dispatch({
-                type: "INITIAL_AMOUNT_SET",
-                payload: state.withHotel ? (travelIn + travelOut) + (hotelFeePerDay*numberOfDays) : (travelIn + travelOut) + (stayFeePerDay*numberOfDays) 
-            })
-        }
-    }
-
-    const discountSet = useCallback((offers) => {
-        if (state.flightType) {
-            dispatch({
-                type: "DISCOUNT_SET",
-                payload: offers[state.flightType]
-            })
-            return
-        } 
+  const discountSet = useCallback(
+    (offers) => {
+      if (state.flightType) {
         dispatch({
-            type: "DISCOUNT_REMOVE"
-        })
-    }, [state.flightType])
+          type: 'DISCOUNT_SET',
+          payload: offers[state.flightType],
+        });
+        return;
+      }
+      dispatch({
+        type: 'DISCOUNT_REMOVE',
+      });
+    },
+    [state.flightType],
+  );
 
-    const amountSet = () => {
-        if (state.discount > 0) {
-        dispatch({
-            type: "FINAL_AMOUNT_SET",
-            payload: Math.floor(state.initialAmount*(1 - state.discount/100))
-        })
-        setValue("amount", Math.floor(state.initialAmount*(1 - state.discount/100)))   
-        return 
-        }
-        else {
-            dispatch({
-            type: "FINAL_AMOUNT_SET",
-            payload: state.initialAmount
-        })
-        setValue("amount", state.initialAmount)
-        }
-    }
-    const open = (title) => {
-        setValue("travellingTo", title)
-    }
-    const close = () => {
-        dispatch({type: "CLOSE"})
-    }
+  const amountSet = useCallback(() => {
+    if (state.discount > 0) {
+      dispatch({
+        type: 'FINAL_AMOUNT_SET',
+        payload: Math.floor(state.initialAmount * (1 - state.discount / 100)),
+      });
 
-    const value = {
-        form,
-        flightType: state.flightType,
-        flightTypeClick,
-        regionsCategory: state.regionsCategory,
-        regionsCategoryClick,
-        eachRegion: state.travellingFromRegion,
-        eachRegionClick,
-        withHotel: state.withHotel,
-        withHotelClick,
-        dateOfLeave: state.date.Leave,
-        dateOfReturn: state.date.Return,
-        setDateClick,
-        initialAmount: state.initialAmount,
-        initialAmountSet,
-        discount: state.discount,
-        discountSet,
-        amount: state.amount,
-        amountSet,
-        open,
-        close
+      return;
+    } else {
+      dispatch({
+        type: 'FINAL_AMOUNT_SET',
+        payload: state.initialAmount,
+      });
     }
+  }, [state.discount, state.initialAmount]);
 
-    return value
-}
+  const formSubmit = async (changeLoading) => {
+    changeLoading(true);
+    const {
+      flightType,
+      regionsCategory,
+      travellingFromRegion,
+      travellingFromLocation,
+      withHotel,
+      date: { Leave, Return },
+      amount,
+    } = state;
 
-export default useBookingState
+    try {
+      const {
+        data: { message },
+      } = await axios.post(
+        `http://localhost:5000/api/v1/bookings/${id}`,
+        {
+          travellingFromLocation,
+          regionsCategory,
+          travellingFromRegion,
+          travellingTo: bookingInfo.title,
+          dateOfLeave: Leave,
+          dateOfReturn: Return,
+          withHotel,
+          flightType,
+          amount,
+        },
+        { headers: { Authorization: `Bearer ${authToken}` } },
+      );
+      closeModal();
+      openSuccessSnackbar(message);
+    } catch (err) {
+      console.log(err);
+      if (err.response.data.msg === 'Authentication Failed') {
+        openSignInModal();
+        return;
+      }
+      closeModal();
+      openFailedSnackbar(err.response.data.msg);
+    } finally {
+      changeLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (bookingInfo.limitedOffers) {
+      discountSet(bookingInfo.limitedOffers);
+    }
+  }, [state.flightType, bookingInfo.limitedOffers, discountSet]);
+
+  useEffect(() => {
+    if (
+      state.date.Leave &&
+      state.date.Return &&
+      state.travellingFromRegion &&
+      bookingInfo.domestic &&
+      bookingInfo.international
+    ) {
+      initialAmountSet({
+        domestic: bookingInfo.domestic,
+        international: bookingInfo.international,
+      });
+      return;
+    }
+  }, [
+    state.date.Leave,
+    state.date.Return,
+    state.withHotel,
+    state.travellingFromRegion,
+    bookingInfo.domestic,
+    bookingInfo.international,
+    initialAmountSet,
+  ]);
+
+  useEffect(() => {
+    if (state.initialAmount) {
+      amountSet();
+    }
+  }, [amountSet, state.initialAmount]);
+
+  const value = {
+    flightType: state.flightType,
+    regionsCategory: state.regionsCategory,
+    eachRegion: state.travellingFromRegion,
+    withHotel: state.withHotel,
+    dateOfLeave: state.date.Leave,
+    dateOfReturn: state.date.Return,
+    initialAmount: state.initialAmount,
+    initialAmountSet,
+    discount: state.discount,
+    discountSet,
+    amount: state.amount,
+    amountSet,
+    flightTypeSelect,
+    regionSelect,
+    errors,
+    locationSelect,
+    hotelToggle,
+    dateSelection,
+    title: bookingInfo.title ?? '',
+    limitedOffers: bookingInfo.limitedOffers ?? '',
+    domestic: bookingInfo.domestic ?? '',
+    international: bookingInfo.international ?? '',
+    formSubmit,
+  };
+
+  return (
+    <BookingContext.Provider {...{ value }}>{children}</BookingContext.Provider>
+  );
+};
+
+const useBookingContext = () => {
+  return useContext(BookingContext);
+};
+
+export default useBookingContext;
